@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Piloxy - Création Web</title>
+<title>Piloxy - Web Agency</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -11,175 +11,170 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
 
 body{
-  background: url('https://img.freepik.com/premium-photo/cinematic-sky-background_1223255-17335.jpg') no-repeat center center fixed;
-  background-size: cover;
-  color:#111;
-  line-height:1.6;
+  background:#0a0a0f;
+  color:#fff;
+  overflow-x:hidden;
 }
 
-/* overlay pour garder lisibilité */
+/* BACKGROUND EFFECT */
 body::before{
   content:"";
   position:fixed;
   inset:0;
-  background:rgba(255,255,255,0.85);
-  backdrop-filter: blur(4px);
+  background: radial-gradient(circle at 20% 30%, rgba(255,0,0,0.15), transparent 40%),
+              radial-gradient(circle at 80% 70%, rgba(255,0,0,0.1), transparent 40%);
   z-index:-1;
-}
-
-/* CONTAINER STYLE (effet cadre) */
-.wrapper{
-  max-width:1200px;
-  margin:20px auto;
-  background:white;
-  border-radius:20px;
-  box-shadow:0 20px 60px rgba(0,0,0,0.08);
-  overflow:hidden;
-  border:1px solid rgba(255,0,0,0.08);
 }
 
 header{
   display:flex;justify-content:space-between;align-items:center;
-  padding:20px 40px;
-  position:sticky;top:0;
-  background:white;
-  border-bottom:1px solid #eee;
-  z-index:1000
+  padding:20px 8%;position:fixed;width:100%;top:0;
+  background:rgba(10,10,15,0.7);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(255,255,255,0.05);
 }
 
-header h1{color:#ff1e1e;font-weight:700}
+header h1{
+  color:#ff2a2a;
+  font-weight:700;
+  text-shadow:0 0 10px rgba(255,0,0,0.5);
+}
 
-nav a{margin:0 15px;text-decoration:none;color:#555;font-weight:500;transition:0.3s}
-nav a:hover{color:#ff1e1e}
+nav a{
+  margin:0 15px;
+  color:#aaa;
+  text-decoration:none;
+  transition:0.3s;
+}
+
+nav a:hover{color:#fff}
 
 .cta{
-  background:#ff1e1e;color:white;padding:10px 20px;border-radius:25px;
-  text-decoration:none;font-weight:600;
-  box-shadow:0 0 0 rgba(255,0,0,0);
-  transition:0.3s
-}
-
-.cta:hover{
+  background:#ff2a2a;
+  padding:10px 20px;
+  border-radius:30px;
+  color:white;
+  text-decoration:none;
   box-shadow:0 0 15px rgba(255,0,0,0.4);
 }
 
 .hero{
-  height:90vh;display:flex;align-items:center;
-  padding:0 40px;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  padding:0 8%;
 }
 
-.hero-content{max-width:600px}
+.hero-content{max-width:650px}
 
 .hero h2{
-  font-size:3rem;
-  opacity:0;
-  transform:translateY(20px);
-  animation:fadeUp 1s ease forwards;
+  font-size:3.5rem;
+  line-height:1.2;
 }
 
 .hero span{
-  color:#ff1e1e;
-  text-shadow:0 0 10px rgba(255,0,0,0.3);
+  color:#ff2a2a;
+  text-shadow:0 0 15px rgba(255,0,0,0.6);
 }
 
 .hero p{
-  margin:20px 0;color:#555;
-  opacity:0;
-  transform:translateY(20px);
-  animation:fadeUp 1s ease forwards;
-  animation-delay:0.2s;
+  margin:20px 0;
+  color:#aaa;
 }
 
-button{
-  padding:12px 25px;border-radius:30px;border:none;
-  cursor:pointer;margin-right:10px;font-weight:600;
-  transition:0.3s
+.buttons button{
+  padding:12px 25px;
+  border-radius:30px;
+  border:none;
+  margin-right:10px;
+  cursor:pointer;
+  font-weight:600;
 }
 
 .btn1{
-  background:#ff1e1e;color:white;
-}
-
-.btn1:hover{
-  box-shadow:0 0 20px rgba(255,0,0,0.5);
-  transform:translateY(-2px);
+  background:#ff2a2a;
+  color:white;
+  box-shadow:0 0 15px rgba(255,0,0,0.4);
 }
 
 .btn2{
-  background:transparent;border:2px solid #ff1e1e;color:#ff1e1e
+  background:transparent;
+  border:1px solid #ff2a2a;
+  color:#ff2a2a;
 }
 
-.btn2:hover{
-  background:#ff1e1e;color:white;
+section{
+  padding:100px 8%;
 }
 
-section{padding:80px 40px}
-
-h3{font-size:2.2rem;margin-bottom:40px}
+h3{
+  font-size:2rem;
+  margin-bottom:40px;
+}
 
 .services, .portfolio{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:25px
+  gap:25px;
 }
 
 .card{
-  background:#fff;padding:25px;border-radius:15px;
-  border:1px solid #eee;transition:0.3s;
-  opacity:0;
-  transform:translateY(30px);
-}
-
-.card.show{
-  opacity:1;
-  transform:translateY(0);
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.05);
+  padding:25px;
+  border-radius:15px;
+  transition:0.3s;
 }
 
 .card:hover{
   transform:translateY(-5px);
-  box-shadow:0 10px 30px rgba(255,0,0,0.15)
+  box-shadow:0 0 25px rgba(255,0,0,0.2);
 }
 
 .portfolio .card{
-  height:180px;display:flex;align-items:center;justify-content:center;
-  color:#aaa;font-size:0.9rem
+  height:180px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#777;
 }
 
 .contact{
-  max-width:600px;margin:auto
+  max-width:600px;
+  margin:auto;
 }
 
 .contact input, .contact textarea{
-  width:100%;padding:15px;margin-bottom:15px;
-  border-radius:10px;border:1px solid #ddd;
-  transition:0.3s
+  width:100%;
+  padding:15px;
+  margin-bottom:15px;
+  border-radius:10px;
+  border:none;
+  background:#111;
+  color:white;
 }
 
 .contact input:focus, .contact textarea:focus{
-  border-color:#ff1e1e;
-  box-shadow:0 0 10px rgba(255,0,0,0.2);
-  outline:none
+  outline:none;
+  box-shadow:0 0 10px rgba(255,0,0,0.4);
 }
 
 .contact button{
-  width:100%;background:#ff1e1e;color:white
+  width:100%;
+  background:#ff2a2a;
+  color:white;
 }
 
 footer{
-  text-align:center;padding:30px;color:#777;border-top:1px solid #eee
-}
-
-/* ANIMATIONS */
-@keyframes fadeUp{
-  to{opacity:1;transform:translateY(0)}
+  text-align:center;
+  padding:30px;
+  color:#666;
 }
 
 </style>
 </head>
 
 <body>
-
-<div class="wrapper">
 
 <header>
   <h1>Piloxy</h1>
@@ -194,28 +189,30 @@ footer{
 
 <section class="hero">
   <div class="hero-content">
-    <h2>Je crée des <span>sites web professionnels</span></h2>
-    <p>Un site moderne, rapide et efficace pour développer votre activité en ligne.</p>
-    <button class="btn1">Voir mes services</button>
-    <button class="btn2">Contact</button>
+    <h2>Je crée des <span>sites qui convertissent</span></h2>
+    <p>Un site moderne ne sert à rien s’il ne vous apporte pas de clients. Je crée des sites pensés pour performer.</p>
+    <div class="buttons">
+      <button class="btn1">Voir mes services</button>
+      <button class="btn2">Contact</button>
+    </div>
   </div>
 </section>
 
 <section id="services">
   <h3>Services</h3>
   <div class="services">
-    <div class="card"> <h4>Création de site</h4><p>Sites modernes et adaptés.</p></div>
-    <div class="card"> <h4>Optimisation</h4><p>Performance et SEO.</p></div>
-    <div class="card"> <h4>Accompagnement</h4><p>Suivi personnalisé.</p></div>
+    <div class="card"><h4>Création de site</h4><p>Design moderne et impactant.</p></div>
+    <div class="card"><h4>Optimisation</h4><p>SEO et performance.</p></div>
+    <div class="card"><h4>Stratégie</h4><p>Attirez plus de clients.</p></div>
   </div>
 </section>
 
 <section id="portfolio">
   <h3>Portfolio</h3>
   <div class="portfolio">
-    <div class="card">Projet 1</div>
-    <div class="card">Projet 2</div>
-    <div class="card">Projet 3</div>
+    <div class="card">Projet</div>
+    <div class="card">Projet</div>
+    <div class="card">Projet</div>
   </div>
 </section>
 
@@ -230,25 +227,8 @@ footer{
 </section>
 
 <footer>
-  <p>© 2026 Piloxy - Maholo</p>
+  <p>© 2026 Piloxy</p>
 </footer>
-
-</div>
-
-<script>
-// animation scroll style Apple
-const cards = document.querySelectorAll('.card');
-
-window.addEventListener('scroll', () => {
-  const trigger = window.innerHeight * 0.85;
-  cards.forEach(card => {
-    const top = card.getBoundingClientRect().top;
-    if(top < trigger){
-      card.classList.add('show');
-    }
-  });
-});
-</script>
 
 </body>
 </html>
