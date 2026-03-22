@@ -252,21 +252,115 @@
   .reveal { opacity: 1; transform: translateY(0); transition: opacity .7s ease, transform .7s ease; }
   .reveal.hidden { opacity: 0; transform: translateY(26px); }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 920px) {
-    .about-cols { grid-template-columns: 1fr; gap: 2rem; }
-    .about-stats { border-left: none; border-top: 1px solid rgba(124,111,205,.15); padding-left: 0; padding-top: 1.5rem; flex-direction: row; flex-wrap: wrap; gap: 1.5rem 2.5rem; }
-    .services-grid { grid-template-columns: 1fr 1fr; }
-    .services-grid .card:nth-child(4), .services-grid .card:nth-child(5) { grid-column: auto; }
+  
+/* ── RESPONSIVE COMPLET ── */
+
+  /* Large desktop */
+  @media (max-width: 1200px) {
+    .container { padding: 0 2rem; }
+    .footer-container { padding: 0 2rem; }
+  }
+
+  /* Tablet paysage */
+  @media (max-width: 1024px) {
     .pillars-header { grid-template-columns: 1fr; gap: 1.5rem; }
-    .pillars-grid { grid-template-columns: 1fr; }
-    .footer-cta-band { grid-template-columns: 1fr; gap: 3rem; }
+    .pillars-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-cta-band { grid-template-columns: 1fr; gap: 3rem; padding: 5rem 0 4rem; }
+    .about-cols { grid-template-columns: 1fr; gap: 2.5rem; }
+    .about-stats { border-left: none; border-top: 1px solid rgba(124,111,205,.15); padding-left: 0; padding-top: 1.8rem; flex-direction: row; flex-wrap: wrap; gap: 1.5rem 3rem; }
   }
-  @media (max-width: 600px) {
-    nav { padding: 1rem 1.4rem; } .nav-links { gap: 1.4rem; }
-    .services-grid { grid-template-columns: 1fr; }
-    .container { padding: 0 1.4rem; }
+
+  /* Tablet portrait */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.4rem; }
+    .nav-links a { font-size: .72rem; letter-spacing: .08em; }
+
+    .hero { padding: 7rem 1.5rem 5rem; }
+    .hero h1 { font-size: clamp(3rem, 10vw, 4.5rem); }
+    .hero-desc { font-size: .95rem; }
+    .hero-cta { flex-direction: column; align-items: center; }
+    .btn { width: 100%; max-width: 280px; text-align: center; }
+
+    .about { padding: 6rem 0; }
+    .about-headline { font-size: clamp(2.2rem, 6vw, 3rem); }
+
+    .services { padding: 6rem 0; }
+    .services-grid {
+      grid-template-columns: 1fr !important;
+      gap: 1rem;
+    }
+    .services-grid .card:nth-child(4),
+    .services-grid .card:nth-child(5) { grid-column: auto !important; }
+
+    .pillars { padding: 6rem 0; }
+    .pillars-grid { grid-template-columns: 1fr; gap: 1rem; }
+
+    .cta-section { padding: 6rem 0; }
+    .cta-inner .section-title { font-size: clamp(2.5rem, 8vw, 3.5rem); }
+
+    .footer-socials-row { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+    .footer-socials-divider { display: none; }
+    .footer-socials-list { flex-wrap: wrap; gap: .8rem; }
+    .footer-cta-title { font-size: clamp(2.5rem, 8vw, 3.5rem); }
   }
+
+  /* Mobile */
+  @media (max-width: 480px) {
+    nav { padding: .9rem 1.2rem; }
+    .nav-logo { font-size: 1.2rem; }
+    .nav-links { gap: 1rem; }
+    .nav-links a { font-size: .68rem; letter-spacing: .06em; }
+
+    .container { padding: 0 1.2rem; }
+    .footer-container { padding: 0 1.2rem; }
+
+    .hero { padding: 6rem 1.2rem 4rem; min-height: auto; }
+    .hero h1 { font-size: clamp(2.6rem, 12vw, 3.5rem); }
+    .hero h1 .pre { font-size: .55em; }
+    .hero-desc { font-size: .9rem; margin: 1.5rem auto 2rem; }
+    .scroll-hint { display: none; }
+
+    .about { padding: 5rem 0; }
+    .about-headline { font-size: clamp(2rem, 8vw, 2.6rem); }
+    .about-bio { font-size: .9rem; }
+    .about-stats { gap: 1.2rem 2rem; }
+    .stat-n { font-size: 2.2rem; }
+    .about-tags { gap: .5rem; }
+    .about-tag { font-size: .65rem; padding: .28rem .8rem; }
+
+    .services { padding: 5rem 0; }
+    .services-header .section-title { font-size: 2.2rem; }
+    .card { padding: 2rem 1.6rem; }
+    .card h3 { font-size: 1.35rem; }
+    .card::before { font-size: 7rem; }
+
+    .pillars { padding: 5rem 0; }
+    .pillar { padding: 2rem 1.6rem; }
+    .pillar h3 { font-size: 1.4rem; }
+
+    .cta-section { padding: 5rem 0; }
+    .cta-inner .section-title { font-size: clamp(2rem, 9vw, 3rem); }
+
+    .footer-cta-band { padding: 4rem 0 3rem; }
+    .footer-cta-title { font-size: clamp(2rem, 8vw, 2.8rem); }
+    .footer-mail-address { font-size: 1.1rem; word-break: break-all; }
+    .footer-socials-list { gap: .6rem; }
+    .footer-social-item { padding: .55rem .9rem; }
+    .footer-social-handle { font-size: .75rem; }
+    .footer-bottom-bar { flex-direction: column; align-items: center; text-align: center; padding: 1.5rem 0; gap: .8rem; }
+  }
+
+  /* Très petit mobile */
+  @media (max-width: 360px) {
+    .nav-links { gap: .7rem; }
+    .hero h1 { font-size: 2.4rem; }
+    .about-headline { font-size: 1.9rem; }
+    .footer-social-handle { display: none; }
+    .footer-social-item { padding: .55rem; }
+  }
+
+
 </style>
 </head>
 <body>
@@ -408,7 +502,7 @@
         <p class="footer-cta-desc">Vous avez un projet en tête ? Je suis disponible pour en discuter et vous accompagner vers vos objectifs.</p>
         <div class="footer-mail-display">
           <span class="footer-mail-label">Adresse e-mail</span>
-          <a href="mailto:maholo.contact@gmail.com" class="footer-mail-address">maholo.contact@gmail.com</a>
+          <a href="/cdn-cgi/l/email-protection#8ae7ebe2e5e6e5a4e9e5e4feebe9fecaede7ebe3e6a4e9e5e7" class="footer-mail-address"><span class="__cf_email__" data-cfemail="325f535a5d5e5d1c515d5c4653514672555f535b5e1c515d5f">[email&#160;protected]</span></a>
         </div>
       </div>
     </div>
@@ -429,17 +523,11 @@
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const reveals = document.querySelectorAll('.reveal');
   reveals.forEach(el => {
     if (el.getBoundingClientRect().top > window.innerHeight) el.classList.add('hidden');
   });
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) setTimeout(() => { e.target.classList.remove('hidden'); }, i * 85);
-    });
-  }, { threshold: 0.05 });
-  reveals.forEach(el => obs.observe(el));
-</script>
+  const obs = new IntersectionOb
 </body>
 </html>
