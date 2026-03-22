@@ -3,19 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Piloxy - Marketing & Création Web</title>
+<title>Piloxy - Web & Marketing</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 body {
-  background: #f8f8f8;
-  color: #333;
+  background: #0f0f1a;
+  color: #fff;
 }
 
 /* HEADER */
@@ -23,127 +25,149 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 10%;
-  background: white;
-  position: sticky;
+  padding: 20px 8%;
+  position: fixed;
+  width: 100%;
   top: 0;
+  background: rgba(15,15,26,0.7);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
 }
 
 header h1 {
-  color: #6c5ce7;
+  color: #a29bfe;
+  font-weight: 700;
 }
 
 nav a {
   margin: 0 15px;
   text-decoration: none;
-  color: #333;
+  color: #ccc;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  color: #fff;
 }
 
 .cta {
-  background: #6c5ce7;
-  color: white;
+  background: linear-gradient(135deg, #6c5ce7, #a29bfe);
   padding: 10px 20px;
-  border-radius: 20px;
+  border-radius: 25px;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
 }
 
 /* HERO */
 .hero {
-  height: 90vh;
+  height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 10%;
-  background: linear-gradient(135deg, #a29bfe, #fd79a8);
-  color: white;
+  padding: 0 8%;
+  background: radial-gradient(circle at top left, #6c5ce7, #0f0f1a);
+}
+
+.hero-content {
+  max-width: 600px;
 }
 
 .hero h2 {
-  font-size: 3rem;
+  font-size: 3.5rem;
+  line-height: 1.2;
+}
+
+.hero span {
+  color: #a29bfe;
 }
 
 .hero p {
   margin: 20px 0;
+  color: #aaa;
 }
 
-.hero button {
-  padding: 15px 25px;
+.buttons {
+  margin-top: 20px;
+}
+
+button {
+  padding: 12px 25px;
+  border-radius: 30px;
   border: none;
-  border-radius: 25px;
-  margin-right: 10px;
   cursor: pointer;
+  margin-right: 10px;
+  font-weight: 600;
 }
 
-.btn1 { background: white; color: #6c5ce7; }
-.btn2 { background: transparent; border: 2px solid white; color: white; }
+.btn1 {
+  background: #fff;
+  color: #6c5ce7;
+}
+
+.btn2 {
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+}
 
 /* SECTIONS */
 section {
-  padding: 80px 10%;
+  padding: 100px 8%;
 }
 
 h3 {
-  margin-bottom: 30px;
-  font-size: 2rem;
+  font-size: 2.2rem;
+  margin-bottom: 40px;
 }
 
-/* SERVICES */
-.services {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
+/* CARDS */
+.services, .pricing {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
 }
 
-.card {
-  flex: 1;
-  min-width: 250px;
-  background: white;
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-}
-
-/* OFFRES */
-.pricing {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.price-card {
-  flex: 1;
-  min-width: 250px;
-  background: white;
+.card, .price-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
   padding: 30px;
   border-radius: 20px;
-  text-align: center;
+  transition: 0.3s;
 }
 
-.price-card h4 {
-  margin-bottom: 10px;
+.card:hover, .price-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
 }
 
 .price {
-  font-size: 2rem;
+  font-size: 2.5rem;
   margin: 20px 0;
+  color: #a29bfe;
 }
 
-/* CTA FINAL */
+/* CTA SECTION */
 .cta-section {
   text-align: center;
-  background: #6c5ce7;
-  color: white;
-  padding: 60px 20px;
+  background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+  padding: 80px 20px;
+  border-radius: 20px;
+}
+
+.cta-section button {
+  margin-top: 20px;
+  background: white;
+  color: #6c5ce7;
 }
 
 /* FOOTER */
 footer {
-  background: #222;
-  color: white;
   text-align: center;
-  padding: 20px;
+  padding: 30px;
+  color: #777;
 }
-</style>
 
+</style>
 </head>
 
 <body>
@@ -160,17 +184,19 @@ footer {
 </header>
 
 <section class="hero">
-  <div>
-    <h2>Je crée des sites web modernes</h2>
-    <p>Développez votre visibilité et attirez plus de clients grâce à un site professionnel.</p>
-    <button class="btn1">Voir mes services</button>
-    <button class="btn2">Me contacter</button>
+  <div class="hero-content">
+    <h2>Je crée des <span>sites web puissants</span></h2>
+    <p>Attire plus de clients avec un site moderne, rapide et optimisé.</p>
+    <div class="buttons">
+      <button class="btn1">Voir mes services</button>
+      <button class="btn2">Contact</button>
+    </div>
   </div>
 </section>
 
 <section>
   <h3>À propos</h3>
-  <p>Je m'appelle Maholo, j'aide les entreprises à développer leur présence en ligne grâce à des solutions modernes et efficaces.</p>
+  <p>Je m'appelle Maholo, j'aide les entreprises à exploser leur présence en ligne avec des solutions modernes, rapides et efficaces.</p>
 </section>
 
 <section>
@@ -178,15 +204,15 @@ footer {
   <div class="services">
     <div class="card">
       <h4>Création de site</h4>
-      <p>Sites modernes et responsive adaptés à votre image.</p>
+      <p>Sites modernes, rapides et optimisés SEO.</p>
     </div>
     <div class="card">
       <h4>Marketing</h4>
-      <p>Stratégie digitale pour attirer plus de clients.</p>
+      <p>Stratégies puissantes pour attirer plus de clients.</p>
     </div>
     <div class="card">
       <h4>Réseaux sociaux</h4>
-      <p>Gestion et croissance de votre audience.</p>
+      <p>Développez votre audience efficacement.</p>
     </div>
   </div>
 </section>
@@ -213,12 +239,13 @@ footer {
 </section>
 
 <section class="cta-section">
-  <h3>Prêt à développer votre activité ?</h3>
-  <p>Contactez-moi dès maintenant</p>
+  <h3>Prêt à passer au niveau supérieur ?</h3>
+  <p>Contacte-moi maintenant 🚀</p>
+  <button>Me contacter</button>
 </section>
 
 <footer>
-  <p>© Piloxy - Maholo</p>
+  <p>© 2026 Piloxy - Maholo</p>
 </footer>
 
 </body>
