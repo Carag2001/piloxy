@@ -3,168 +3,91 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Piloxy - Web & Marketing</title>
+<title>Piloxy - Création Web</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+
+body{background:#ffffff;color:#111;line-height:1.6}
+
+header{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:20px 8%;position:fixed;width:100%;top:0;
+  background:white;border-bottom:1px solid #eee;z-index:1000
 }
 
-body {
-  background: #0f0f1a;
-  color: #fff;
+header h1{color:#ff1e1e;font-weight:700}
+
+nav a{margin:0 15px;text-decoration:none;color:#555;font-weight:500}
+nav a:hover{color:#000}
+
+.cta{
+  background:#ff1e1e;color:white;padding:10px 20px;border-radius:25px;
+  text-decoration:none;font-weight:600
 }
 
-/* HEADER */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 8%;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  background: rgba(15,15,26,0.7);
-  backdrop-filter: blur(10px);
-  z-index: 1000;
+.hero{
+  height:100vh;display:flex;align-items:center;
+  padding:0 8%;margin-top:80px
 }
 
-header h1 {
-  color: #a29bfe;
-  font-weight: 700;
+.hero-content{max-width:600px}
+
+.hero h2{font-size:3rem}
+.hero span{color:#ff1e1e}
+
+.hero p{margin:20px 0;color:#555}
+
+button{
+  padding:12px 25px;border-radius:30px;border:none;
+  cursor:pointer;margin-right:10px;font-weight:600
 }
 
-nav a {
-  margin: 0 15px;
-  text-decoration: none;
-  color: #ccc;
-  transition: 0.3s;
+.btn1{background:#ff1e1e;color:white}
+.btn2{background:transparent;border:2px solid #ff1e1e;color:#ff1e1e}
+
+section{padding:100px 8%}
+
+h3{font-size:2.2rem;margin-bottom:40px}
+
+.services, .portfolio{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:25px
 }
 
-nav a:hover {
-  color: #fff;
+.card{
+  background:#fff;padding:25px;border-radius:15px;
+  border:1px solid #eee;transition:0.3s
 }
 
-.cta {
-  background: linear-gradient(135deg, #6c5ce7, #a29bfe);
-  padding: 10px 20px;
-  border-radius: 25px;
-  color: white;
-  text-decoration: none;
-  font-weight: 600;
+.card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 10px 30px rgba(0,0,0,0.08)
 }
 
-/* HERO */
-.hero {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  padding: 0 8%;
-  background: radial-gradient(circle at top left, #6c5ce7, #0f0f1a);
+.portfolio .card{
+  height:180px;display:flex;align-items:center;justify-content:center;
+  color:#aaa;font-size:0.9rem
 }
 
-.hero-content {
-  max-width: 600px;
+.contact{
+  max-width:600px;margin:auto
 }
 
-.hero h2 {
-  font-size: 3.5rem;
-  line-height: 1.2;
+.contact input, .contact textarea{
+  width:100%;padding:15px;margin-bottom:15px;
+  border-radius:10px;border:1px solid #ddd
 }
 
-.hero span {
-  color: #a29bfe;
+.contact button{
+  width:100%;background:#ff1e1e;color:white
 }
 
-.hero p {
-  margin: 20px 0;
-  color: #aaa;
-}
-
-.buttons {
-  margin-top: 20px;
-}
-
-button {
-  padding: 12px 25px;
-  border-radius: 30px;
-  border: none;
-  cursor: pointer;
-  margin-right: 10px;
-  font-weight: 600;
-}
-
-.btn1 {
-  background: #fff;
-  color: #6c5ce7;
-}
-
-.btn2 {
-  background: transparent;
-  border: 2px solid #fff;
-  color: #fff;
-}
-
-/* SECTIONS */
-section {
-  padding: 100px 8%;
-}
-
-h3 {
-  font-size: 2.2rem;
-  margin-bottom: 40px;
-}
-
-/* CARDS */
-.services, .pricing {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 25px;
-}
-
-.card, .price-card {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  padding: 30px;
-  border-radius: 20px;
-  transition: 0.3s;
-}
-
-.card:hover, .price-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-}
-
-.price {
-  font-size: 2.5rem;
-  margin: 20px 0;
-  color: #a29bfe;
-}
-
-/* CTA SECTION */
-.cta-section {
-  text-align: center;
-  background: linear-gradient(135deg, #6c5ce7, #a29bfe);
-  padding: 80px 20px;
-  border-radius: 20px;
-}
-
-.cta-section button {
-  margin-top: 20px;
-  background: white;
-  color: #6c5ce7;
-}
-
-/* FOOTER */
-footer {
-  text-align: center;
-  padding: 30px;
-  color: #777;
+footer{
+  text-align:center;padding:30px;color:#777;border-top:1px solid #eee
 }
 
 </style>
@@ -176,72 +99,57 @@ footer {
   <h1>Piloxy</h1>
   <nav>
     <a href="#">Accueil</a>
-    <a href="#">Services</a>
-    <a href="#">Offres</a>
-    <a href="#">Contact</a>
+    <a href="#services">Services</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#contact">Contact</a>
   </nav>
-  <a class="cta" href="#">Contact</a>
+  <a class="cta" href="#contact">Contact</a>
 </header>
 
 <section class="hero">
   <div class="hero-content">
-    <h2>Je crée des <span>sites web puissants</span></h2>
-    <p>Attire plus de clients avec un site moderne, rapide et optimisé.</p>
-    <div class="buttons">
-      <button class="btn1">Voir mes services</button>
-      <button class="btn2">Contact</button>
-    </div>
+    <h2>Je crée des <span>sites web professionnels</span></h2>
+    <p>Un site moderne, rapide et efficace pour développer votre activité en ligne.</p>
+    <button class="btn1">Voir mes services</button>
+    <button class="btn2">Contact</button>
   </div>
 </section>
 
-<section>
-  <h3>À propos</h3>
-  <p>Je m'appelle Maholo, j'aide les entreprises à exploser leur présence en ligne avec des solutions modernes, rapides et efficaces.</p>
-</section>
-
-<section>
+<section id="services">
   <h3>Services</h3>
   <div class="services">
     <div class="card">
       <h4>Création de site</h4>
-      <p>Sites modernes, rapides et optimisés SEO.</p>
+      <p>Sites modernes, rapides et adaptés à votre image.</p>
     </div>
     <div class="card">
-      <h4>Marketing</h4>
-      <p>Stratégies puissantes pour attirer plus de clients.</p>
+      <h4>Optimisation</h4>
+      <p>Performance, SEO et expérience utilisateur optimisée.</p>
     </div>
     <div class="card">
-      <h4>Réseaux sociaux</h4>
-      <p>Développez votre audience efficacement.</p>
+      <h4>Accompagnement</h4>
+      <p>Conseils et suivi pour faire évoluer votre présence en ligne.</p>
     </div>
   </div>
 </section>
 
-<section>
-  <h3>Offres</h3>
-  <div class="pricing">
-    <div class="price-card">
-      <h4>Starter</h4>
-      <p class="price">150€</p>
-      <p>Site simple</p>
-    </div>
-    <div class="price-card">
-      <h4>Pro</h4>
-      <p class="price">300€</p>
-      <p>Site complet</p>
-    </div>
-    <div class="price-card">
-      <h4>Premium</h4>
-      <p class="price">500€</p>
-      <p>Site + marketing</p>
-    </div>
+<section id="portfolio">
+  <h3>Portfolio</h3>
+  <div class="portfolio">
+    <div class="card">Projet 1</div>
+    <div class="card">Projet 2</div>
+    <div class="card">Projet 3</div>
   </div>
 </section>
 
-<section class="cta-section">
-  <h3>Prêt à passer au niveau supérieur ?</h3>
-  <p>Contacte-moi maintenant 🚀</p>
-  <button>Me contacter</button>
+<section id="contact">
+  <h3>Contact</h3>
+  <div class="contact">
+    <input type="text" placeholder="Nom">
+    <input type="email" placeholder="Email">
+    <textarea rows="5" placeholder="Votre projet..."></textarea>
+    <button>Envoyer</button>
+  </div>
 </section>
 
 <footer>
