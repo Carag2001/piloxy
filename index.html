@@ -373,7 +373,8 @@
     border: none;
     cursor: pointer;
     padding: 6px;
-    z-index: 200;
+    z-index: 300;
+    position: relative;
   }
 
   .hamburger span {
@@ -402,7 +403,11 @@
       align-items: center;
       justify-content: center;
       gap: 2.5rem;
-      z-index: 150;
+      z-index: 250;
+    }
+
+    .hamburger {
+      z-index: 300 !important;
     }
 
     .nav-links.open { display: flex; }
@@ -590,17 +595,24 @@
   const obs = new IntersectionOb
 
 <script>
-  const btn = document.getElementById('hamburger');
-  const menu = document.getElementById('nav-links');
+  document.addEventListener('DOMContentLoaded', function() {
+    var btn = document.getElementById('hamburger');
+    var menu = document.getElementById('nav-links');
 
-  btn.addEventListener('click', () => {
-    btn.classList.toggle('open');
-    menu.classList.toggle('open');
+    if (btn && menu) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        btn.classList.toggle('open');
+        menu.classList.toggle('open');
+      });
+    }
   });
 
   function closeMenu() {
-    btn.classList.remove('open');
-    menu.classList.remove('open');
+    var btn = document.getElementById('hamburger');
+    var menu = document.getElementById('nav-links');
+    if (btn) btn.classList.remove('open');
+    if (menu) menu.classList.remove('open');
   }
 </script>
 </body>
