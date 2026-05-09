@@ -10,24 +10,33 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --gold: #8B6914;
-    --gold-light: #C4963A;
-    --gold-pale: #F5EDD8;
-    --gold-border: #C9A96E;
-    --brown-dark: #3D2B0F;
-    --brown-mid: #6B4C22;
-    --cream: #FAF6EE;
-    --cream-deep: #F0E8D5;
-    --text-dark: #2A1C08;
-    --text-mid: #5C4020;
-    --text-light: #8B6914;
+    --blue:        #0066FF;
+    --blue-bright: #3385FF;
+    --blue-pale:   #E6EEFF;
+    --blue-deep:   #0044BB;
+
+    --black:       #0A0A0F;
+    --dark:        #111118;
+    --dark-2:      #1A1A24;
+    --gray-dark:   #2C2C3A;
+    --gray-mid:    #6B6B80;
+    --gray-light:  #C4C4D0;
+    --gray-pale:   #EBEBF0;
+
+    --beige:       #F5F2EC;
+    --beige-dark:  #E8E3D8;
+    --white:       #FFFFFF;
+
+    --text-dark:   #0A0A0F;
+    --text-mid:    #3A3A4A;
+    --text-light:  #6B6B80;
   }
 
   html { scroll-behavior: smooth; }
 
   body {
     font-family: 'Jost', sans-serif;
-    background: var(--cream);
+    background: var(--beige);
     color: var(--text-dark);
     font-weight: 300;
     font-size: 16px;
@@ -35,7 +44,6 @@
     overflow-x: hidden;
   }
 
-  /* ── NAV ── */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -44,41 +52,36 @@
     align-items: center;
     justify-content: space-between;
     padding: 1.2rem 4rem;
-    background: rgba(250,246,238,0.96);
-    border-bottom: 0.5px solid var(--gold-border);
-    backdrop-filter: blur(8px);
+    background: rgba(245,242,236,0.96);
+    border-bottom: 1px solid var(--beige-dark);
+    backdrop-filter: blur(10px);
   }
 
   .nav-logo {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.7rem;
     font-weight: 600;
-    color: var(--brown-dark);
+    color: var(--black);
     letter-spacing: 0.04em;
     text-decoration: none;
   }
 
-  .nav-logo span { color: var(--gold-light); }
+  .nav-logo span { color: var(--blue); }
 
-  .nav-links {
-    display: flex;
-    gap: 2.5rem;
-    list-style: none;
-  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
 
   .nav-links a {
     text-decoration: none;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     font-weight: 400;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--text-mid);
+    color: var(--text-light);
     transition: color 0.2s;
   }
 
-  .nav-links a:hover { color: var(--gold-light); }
+  .nav-links a:hover { color: var(--blue); }
 
-  /* ── HERO ── */
   #hero {
     min-height: 100vh;
     display: flex;
@@ -89,23 +92,42 @@
     padding: 8rem 2rem 4rem;
     position: relative;
     overflow: hidden;
+    background: var(--black);
+  }
+
+  #hero::before {
+    content: '';
+    position: absolute;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(0,102,255,0.18) 0%, transparent 65%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    pointer-events: none;
   }
 
   .hero-ornament {
     width: 100%;
-    max-width: 600px;
+    max-width: 500px;
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold-border), transparent);
+    background: linear-gradient(90deg, transparent, var(--blue), transparent);
     margin: 1.5rem auto;
+    opacity: 0.5;
   }
 
   .hero-tag {
-    font-size: 0.72rem;
-    letter-spacing: 0.25em;
+    font-size: 0.68rem;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
-    color: var(--gold-light);
+    color: var(--blue-bright);
     font-weight: 400;
     margin-bottom: 1.5rem;
+    border: 1px solid rgba(0,102,255,0.3);
+    display: inline-block;
+    padding: 0.4rem 1.2rem;
+    border-radius: 50px;
+    background: rgba(0,102,255,0.07);
+    position: relative; z-index: 1;
   }
 
   #hero h1 {
@@ -113,79 +135,56 @@
     font-size: clamp(3.5rem, 8vw, 7rem);
     font-weight: 300;
     line-height: 1.05;
-    color: var(--brown-dark);
+    color: var(--white);
     letter-spacing: -0.01em;
     margin-bottom: 0.3rem;
+    position: relative; z-index: 1;
   }
 
-  #hero h1 em {
-    font-style: italic;
-    color: var(--gold);
-  }
+  #hero h1 em { font-style: italic; color: var(--blue-bright); }
 
   .hero-sub {
     font-size: clamp(0.9rem, 1.5vw, 1.05rem);
-    color: var(--text-mid);
+    color: var(--gray-light);
     max-width: 520px;
     margin: 1.5rem auto 2.5rem;
     line-height: 1.8;
     font-weight: 300;
+    position: relative; z-index: 1;
   }
 
   .btn-primary {
     display: inline-block;
     padding: 0.9rem 2.8rem;
-    border: 1px solid var(--gold-border);
-    color: var(--brown-dark);
+    background: var(--blue);
+    color: var(--white);
     text-decoration: none;
     font-size: 0.75rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    font-weight: 400;
+    font-weight: 500;
     transition: all 0.3s;
-    background: transparent;
     font-family: 'Jost', sans-serif;
     cursor: pointer;
+    border-radius: 4px;
+    border: 1px solid var(--blue);
+    position: relative; z-index: 1;
   }
 
   .btn-primary:hover {
-    background: var(--brown-dark);
-    color: var(--cream);
-    border-color: var(--brown-dark);
+    background: transparent;
+    color: var(--blue-bright);
+    border-color: var(--blue-bright);
   }
 
-  /* Decorative corner lines behind hero text */
-  .hero-bg-deco {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: -1;
-  }
-
-  .corner {
-    position: absolute;
-    width: 80px;
-    height: 80px;
-    border-color: var(--gold-border);
-    border-style: solid;
-    opacity: 0.4;
-  }
-
-  .corner-tl { top: 90px; left: 40px; border-width: 1px 0 0 1px; }
-  .corner-tr { top: 90px; right: 40px; border-width: 1px 1px 0 0; }
-  .corner-bl { bottom: 40px; left: 40px; border-width: 0 0 1px 1px; }
-  .corner-br { bottom: 40px; right: 40px; border-width: 0 1px 1px 0; }
-
-  /* ── SECTION BASE ── */
   section { padding: 6rem 2rem; }
-
   .container { max-width: 1100px; margin: 0 auto; }
 
   .section-label {
-    font-size: 0.7rem;
-    letter-spacing: 0.25em;
+    font-size: 0.68rem;
+    letter-spacing: 0.28em;
     text-transform: uppercase;
-    color: var(--gold-light);
+    color: var(--blue);
     font-weight: 400;
     margin-bottom: 0.8rem;
     display: block;
@@ -195,24 +194,23 @@
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(2rem, 4vw, 3.2rem);
     font-weight: 300;
-    color: var(--brown-dark);
+    color: var(--text-dark);
     line-height: 1.2;
     margin-bottom: 1rem;
   }
 
-  .section-title em { font-style: italic; color: var(--gold); }
+  .section-title em { font-style: italic; color: var(--blue); }
 
   .divider {
-    width: 60px;
-    height: 1px;
-    background: var(--gold-border);
+    width: 50px;
+    height: 2px;
+    background: var(--blue);
     margin: 1.5rem 0 2.5rem;
   }
 
   .divider.center { margin-left: auto; margin-right: auto; }
 
-  /* ── A PROPOS ── */
-  #apropos { background: var(--cream); }
+  #apropos { background: var(--beige); }
 
   .about-grid {
     display: grid;
@@ -221,70 +219,64 @@
     align-items: start;
   }
 
-  .about-text p {
-    color: var(--text-mid);
-    margin-bottom: 1.2rem;
-    font-size: 0.97rem;
-  }
+  .about-text p { color: var(--text-mid); margin-bottom: 1.2rem; font-size: 0.97rem; }
 
   .about-mission {
-    background: var(--cream-deep);
-    border-left: 2px solid var(--gold-border);
+    background: var(--white);
+    border-left: 3px solid var(--blue);
     padding: 2rem 2rem 2rem 2.5rem;
+    border-radius: 0 8px 8px 0;
   }
 
   .about-mission h3 {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.4rem;
     font-weight: 600;
-    color: var(--brown-dark);
+    color: var(--black);
     margin-bottom: 1rem;
   }
 
-  .about-mission p {
-    color: var(--text-mid);
-    font-size: 0.95rem;
-    margin-bottom: 1rem;
-  }
-
+  .about-mission p { color: var(--text-mid); font-size: 0.95rem; margin-bottom: 1rem; }
   .about-mission p:last-child { margin-bottom: 0; }
 
-  /* ── SERVICES ── */
-  #services { background: var(--cream-deep); }
+  #services { background: var(--white); }
 
-  .services-intro {
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto 4rem;
-  }
-
-  .services-intro p {
-    color: var(--text-mid);
-    font-size: 0.97rem;
-  }
+  .services-intro { text-align: center; max-width: 600px; margin: 0 auto 4rem; }
+  .services-intro p { color: var(--text-mid); font-size: 0.97rem; }
 
   .services-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2px;
-    background: var(--gold-border);
-    border: 1px solid var(--gold-border);
+    gap: 1.5px;
+    background: var(--gray-pale);
+    border: 1px solid var(--gray-pale);
   }
 
   .service-card {
-    background: var(--cream);
+    background: var(--white);
     padding: 2.5rem;
     transition: background 0.3s;
     position: relative;
+    overflow: hidden;
   }
 
-  .service-card:hover { background: var(--gold-pale); }
+  .service-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 0; height: 3px;
+    background: var(--blue);
+    transition: width 0.4s ease;
+  }
+
+  .service-card:hover::after { width: 100%; }
+  .service-card:hover { background: var(--blue-pale); }
 
   .service-num {
     font-family: 'Cormorant Garamond', serif;
     font-size: 3rem;
     font-weight: 300;
-    color: var(--gold-border);
+    color: var(--gray-pale);
     line-height: 1;
     margin-bottom: 1rem;
     display: block;
@@ -294,26 +286,18 @@
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.4rem;
     font-weight: 600;
-    color: var(--brown-dark);
+    color: var(--black);
     margin-bottom: 0.8rem;
   }
 
-  .service-card p {
-    color: var(--text-mid);
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-  }
+  .service-card p { color: var(--text-mid); font-size: 0.9rem; margin-bottom: 1rem; }
 
-  .service-list {
-    list-style: none;
-    margin-top: 0.8rem;
-  }
+  .service-list { list-style: none; margin-top: 0.8rem; }
 
   .service-list li {
     font-size: 0.85rem;
-    color: var(--text-mid);
-    padding: 0.3rem 0;
-    padding-left: 1.2rem;
+    color: var(--text-light);
+    padding: 0.3rem 0 0.3rem 1.2rem;
     position: relative;
   }
 
@@ -321,32 +305,39 @@
     content: '—';
     position: absolute;
     left: 0;
-    color: var(--gold-light);
+    color: var(--blue);
     font-size: 0.8rem;
   }
 
-  /* ── VALEURS ── */
-  #valeurs { background: var(--brown-dark); }
-
-  #valeurs .section-label { color: var(--gold-light); }
-  #valeurs .section-title { color: var(--cream); }
-  #valeurs .section-title em { color: var(--gold-light); }
-  #valeurs .divider { background: var(--gold-border); }
+  #valeurs { background: var(--dark); }
+  #valeurs .section-label { color: var(--blue-bright); }
+  #valeurs .section-title { color: var(--white); }
+  #valeurs .section-title em { color: var(--blue-bright); }
+  #valeurs .divider { background: var(--blue); }
 
   .valeurs-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 3rem;
+    gap: 2px;
+    background: var(--gray-dark);
+    border: 1px solid var(--gray-dark);
     margin-top: 1rem;
   }
 
-  .valeur-item { text-align: center; }
+  .valeur-item {
+    text-align: center;
+    background: var(--dark-2);
+    padding: 3rem 2rem;
+    transition: background 0.3s;
+  }
+
+  .valeur-item:hover { background: var(--gray-dark); }
 
   .valeur-icon {
     font-family: 'Cormorant Garamond', serif;
     font-size: 2.5rem;
     font-weight: 300;
-    color: var(--gold-light);
+    color: var(--blue-bright);
     display: block;
     margin-bottom: 1rem;
     font-style: italic;
@@ -356,19 +347,14 @@
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.1rem;
     font-weight: 600;
-    color: var(--cream);
+    color: var(--white);
     margin-bottom: 0.5rem;
     letter-spacing: 0.05em;
   }
 
-  .valeur-item p {
-    font-size: 0.85rem;
-    color: rgba(250,246,238,0.6);
-    line-height: 1.7;
-  }
+  .valeur-item p { font-size: 0.85rem; color: var(--gray-mid); line-height: 1.7; }
 
-  /* ── FONDATEUR ── */
-  #fondateur { background: var(--cream); }
+  #fondateur { background: var(--beige); }
 
   .fondateur-wrap {
     display: grid;
@@ -379,8 +365,8 @@
 
   .fondateur-portrait {
     aspect-ratio: 3/4;
-    background: var(--cream-deep);
-    border: 1px solid var(--gold-border);
+    background: var(--beige-dark);
+    border: 1px solid var(--gray-light);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -390,48 +376,44 @@
   .fondateur-portrait::before {
     content: '';
     position: absolute;
-    inset: -8px;
-    border: 0.5px solid var(--gold-border);
-    opacity: 0.5;
+    inset: -6px;
+    border: 1px solid var(--blue);
+    opacity: 0.25;
   }
 
   .portrait-initials {
     font-family: 'Cormorant Garamond', serif;
     font-size: 4rem;
     font-weight: 300;
-    color: var(--gold-border);
+    color: var(--blue);
     font-style: italic;
+    opacity: 0.6;
   }
 
   .fondateur-name {
     font-family: 'Cormorant Garamond', serif;
     font-size: 2rem;
     font-weight: 400;
-    color: var(--brown-dark);
+    color: var(--black);
     margin-bottom: 0.3rem;
   }
 
   .fondateur-title {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--gold-light);
+    color: var(--gray-mid);
     margin-bottom: 2rem;
     display: block;
   }
 
-  .fondateur-bio p {
-    color: var(--text-mid);
-    font-size: 0.97rem;
-    margin-bottom: 1rem;
-  }
+  .fondateur-bio p { color: var(--text-mid); font-size: 0.97rem; margin-bottom: 1rem; }
 
-  /* ── CONTACT / RÉSEAUX ── */
-  #contact { background: var(--brown-dark); text-align: center; }
-  #contact .section-label { color: var(--gold-light); }
-  #contact .section-title { color: var(--cream); }
-  #contact .section-title em { color: var(--gold-light); }
-  #contact .divider { background: var(--gold-border); }
+  #contact { background: var(--black); text-align: center; }
+  #contact .section-label { color: var(--blue-bright); }
+  #contact .section-title { color: var(--white); }
+  #contact .section-title em { color: var(--blue-bright); }
+  #contact .divider { background: var(--blue); }
 
   .social-grid {
     display: flex;
@@ -447,41 +429,29 @@
     align-items: center;
     gap: 0.9rem;
     padding: 2rem 2.5rem;
-    border: 1px solid rgba(201,169,110,0.35);
-    background: rgba(250,246,238,0.04);
+    border: 1px solid var(--gray-dark);
+    background: var(--dark-2);
     text-decoration: none;
     min-width: 160px;
     transition: background 0.3s, border-color 0.3s, transform 0.2s;
   }
 
   .social-card:hover {
-    background: rgba(250,246,238,0.1);
-    border-color: var(--gold-border);
+    background: var(--gray-dark);
+    border-color: var(--blue);
     transform: translateY(-4px);
   }
 
-  .social-icon {
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  .social-icon { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; }
 
-  .social-icon svg {
-    width: 32px;
-    height: 32px;
-    fill: var(--gold-light);
-    transition: fill 0.2s;
-  }
-
-  .social-card:hover .social-icon svg { fill: var(--gold-border); }
+  .social-icon svg { width: 28px; height: 28px; fill: var(--blue-bright); transition: fill 0.2s; }
+  .social-card:hover .social-icon svg { fill: var(--white); }
 
   .social-name {
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: rgba(250,246,238,0.5);
+    color: var(--gray-mid);
     font-weight: 400;
   }
 
@@ -489,50 +459,41 @@
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.05rem;
     font-weight: 400;
-    color: var(--cream);
+    color: var(--white);
     font-style: italic;
   }
 
-  /* ── FOOTER ── */
   footer {
-    background: var(--brown-dark);
-    color: rgba(250,246,238,0.5);
+    background: var(--dark);
+    color: var(--gray-mid);
     text-align: center;
     padding: 2rem;
     font-size: 0.78rem;
-    letter-spacing: 0.1em;
-    border-top: 1px solid var(--gold-border);
+    letter-spacing: 0.08em;
+    border-top: 1px solid var(--gray-dark);
   }
 
-  footer span { color: var(--gold-light); }
+  footer span { color: var(--blue-bright); }
 
-  /* ── ANIMATIONS ── */
   .fade-in {
     opacity: 0;
     transform: translateY(24px);
     transition: opacity 0.7s ease, transform 0.7s ease;
   }
 
-  .fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-  /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
     nav { padding: 1rem 1.5rem; }
     .nav-links { display: none; }
     .about-grid, .fondateur-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
     .services-grid { grid-template-columns: 1fr; }
-    .valeurs-grid { grid-template-columns: 1fr; gap: 2rem; }
-    .corner { display: none; }
-    .contact-box { padding: 2.5rem 1.5rem; }
+    .valeurs-grid { grid-template-columns: 1fr; gap: 2px; }
   }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <a class="nav-logo" href="#hero">Pil<span>o</span>xy</a>
   <ul class="nav-links">
@@ -543,14 +504,7 @@
   </ul>
 </nav>
 
-<!-- HERO -->
 <section id="hero">
-  <div class="hero-bg-deco">
-    <div class="corner corner-tl"></div>
-    <div class="corner corner-tr"></div>
-    <div class="corner corner-bl"></div>
-    <div class="corner corner-br"></div>
-  </div>
   <p class="hero-tag">Agence Marketing Digital &amp; Communication Visuelle</p>
   <div class="hero-ornament"></div>
   <h1>Donnez de la <em>voix</em><br>à votre entreprise</h1>
@@ -559,7 +513,6 @@
   <a href="#services" class="btn-primary">Découvrir nos services</a>
 </section>
 
-<!-- À PROPOS -->
 <section id="apropos">
   <div class="container">
     <div class="about-grid">
@@ -582,7 +535,6 @@
   </div>
 </section>
 
-<!-- SERVICES -->
 <section id="services">
   <div class="container">
     <div class="services-intro fade-in">
@@ -592,7 +544,6 @@
       <p>Des solutions complètes pour construire et valoriser votre image digitale, pensées pour chaque profil d'entreprise.</p>
     </div>
     <div class="services-grid">
-
       <div class="service-card fade-in">
         <span class="service-num">01</span>
         <h3>Création de contenu</h3>
@@ -604,7 +555,6 @@
           <li>Contenus pour Instagram, TikTok, Facebook et autres plateformes</li>
         </ul>
       </div>
-
       <div class="service-card fade-in">
         <span class="service-num">02</span>
         <h3>Création de sites web</h3>
@@ -616,7 +566,6 @@
           <li>Faciliter la prise de contact avec les clients</li>
         </ul>
       </div>
-
       <div class="service-card fade-in">
         <span class="service-num">03</span>
         <h3>Photographie &amp; Vidéo</h3>
@@ -629,7 +578,6 @@
           <li>Captation d'événements</li>
         </ul>
       </div>
-
       <div class="service-card fade-in">
         <span class="service-num">04</span>
         <h3>Montage vidéo &amp; Retouche</h3>
@@ -642,12 +590,10 @@
           <li>Optimisation pour les réseaux sociaux</li>
         </ul>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- VALEURS -->
 <section id="valeurs">
   <div class="container">
     <div style="text-align:center" class="fade-in">
@@ -675,7 +621,6 @@
   </div>
 </section>
 
-<!-- FONDATEUR -->
 <section id="fondateur">
   <div class="container">
     <div class="fondateur-wrap">
@@ -697,7 +642,6 @@
   </div>
 </section>
 
-<!-- CONTACT / RÉSEAUX -->
 <section id="contact">
   <div class="container">
     <div style="text-align:center" class="fade-in">
@@ -706,56 +650,38 @@
       <div class="divider center"></div>
     </div>
     <div class="social-grid fade-in">
-
-      <!-- Instagram -->
       <a class="social-card" href="https://www.instagram.com/D-Maholo" target="_blank" rel="noopener">
         <div class="social-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-          </svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
         </div>
         <span class="social-name">Instagram</span>
         <span class="social-handle">@D-Maholo</span>
       </a>
-
-      <!-- TikTok -->
       <a class="social-card" href="https://www.tiktok.com/@_0_woody_0_" target="_blank" rel="noopener">
         <div class="social-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/>
-          </svg>
+          <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/></svg>
         </div>
         <span class="social-name">TikTok</span>
         <span class="social-handle">@_0_woody_0_</span>
       </a>
-
-      <!-- Snapchat -->
       <a class="social-card" href="https://www.snapchat.com/add/kini-dauber" target="_blank" rel="noopener">
         <div class="social-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12.206.793c.99 0 4.347.276 5.93 3.821.529 1.193.403 3.219.317 4.baron-.customer 0-.client 0 0 0l-.004.045c-.016.176-.032.352.05.523.237.497 1.12.843 1.473.96.238.077.48.116.486.321.004.143-.109.287-.3.349-.176.057-.371.078-.566.079-.21.001-.41.006-.595.063-.344.107-.408.372-.272.558.004.006.011.016.016.023.197.265.424.568.424.858 0 .29-.149.484-.354.612-.257.162-.579.246-.897.322-.419.098-.815.19-1.043.416-.261.26-.326.606-.392.957-.052.279-.106.566-.27.787-.176.237-.455.34-.752.34-.158 0-.32-.027-.474-.079-.298-.101-.557-.291-.816-.481-.361-.262-.722-.523-1.15-.523-.427 0-.789.261-1.15.523-.259.19-.518.38-.816.481-.154.052-.316.079-.474.079-.297 0-.576-.103-.752-.34-.164-.221-.218-.508-.27-.787-.066-.351-.131-.697-.392-.957-.228-.226-.624-.318-1.043-.416-.318-.076-.64-.16-.897-.322-.205-.128-.354-.322-.354-.612 0-.29.227-.593.424-.858.005-.007.012-.017.016-.023.136-.186.072-.451-.272-.558-.185-.057-.385-.062-.595-.063-.195-.001-.39-.022-.566-.079-.191-.062-.304-.206-.3-.349.006-.205.248-.244.486-.321.353-.117 1.236-.463 1.473-.96.082-.171.066-.347.05-.523l-.004-.045c-.086-1.033-.212-3.057.317-4.25C7.853 1.069 11.215.793 12.206.793z"/>
-          </svg>
+          <svg viewBox="0 0 24 24"><path d="M12.206.793c.99 0 4.347.276 5.93 3.821.529 1.193.403 3.219.317 4.45l-.004.045c-.016.176-.032.352.05.523.237.497 1.12.843 1.473.96.238.077.48.116.486.321.004.143-.109.287-.3.349-.176.057-.371.078-.566.079-.21.001-.41.006-.595.063-.344.107-.408.372-.272.558l.016.023c.197.265.424.568.424.858 0 .29-.149.484-.354.612-.257.162-.579.246-.897.322-.419.098-.815.19-1.043.416-.261.26-.326.606-.392.957-.052.279-.106.566-.27.787-.176.237-.455.34-.752.34-.158 0-.32-.027-.474-.079-.298-.101-.557-.291-.816-.481-.361-.262-.722-.523-1.15-.523-.427 0-.789.261-1.15.523-.259.19-.518.38-.816.481-.154.052-.316.079-.474.079-.297 0-.576-.103-.752-.34-.164-.221-.218-.508-.27-.787-.066-.351-.131-.697-.392-.957-.228-.226-.624-.318-1.043-.416-.318-.076-.64-.16-.897-.322-.205-.128-.354-.322-.354-.612 0-.29.227-.593.424-.858l.016-.023c.136-.186.072-.451-.272-.558-.185-.057-.385-.062-.595-.063-.195-.001-.39-.022-.566-.079-.191-.062-.304-.206-.3-.349.006-.205.248-.244.486-.321.353-.117 1.236-.463 1.473-.96.082-.171.066-.347.05-.523l-.004-.045c-.086-1.231-.212-3.057.317-4.45C7.853 1.069 11.215.793 12.206.793z"/></svg>
         </div>
         <span class="social-name">Snapchat</span>
         <span class="social-handle">kini-dauber</span>
       </a>
-
-      <!-- Mail -->
       <a class="social-card" href="mailto:maholo.contact@gmail.com">
         <div class="social-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-          </svg>
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
         </div>
         <span class="social-name">E-mail</span>
         <span class="social-handle">maholo.contact@gmail.com</span>
       </a>
-
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <p>© 2025 <span>Piloxy</span> · Agence Marketing Digital &amp; Communication Visuelle · Fondée par Dauber Maholo</p>
 </footer>
@@ -763,13 +689,9 @@
 <script>
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
-      }
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
     });
   }, { threshold: 0.12 });
-
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 </script>
 </body>
