@@ -3,1057 +3,774 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maholo · Piloxy — Marketing Manager</title>
+<title>Piloxy – Agence Marketing Digital & Communication Visuelle</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@200;300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root {
-  --ink: #0a0805;
-  --cream: #f5f0e8;
-  --gold: #c8a96e;
-  --gold-light: #e8d5a8;
-  --gold-dim: rgba(200,169,110,.18);
-  --red: #c0392b;
-  --fg: #f5f0e8;
-  --muted: rgba(245,240,232,.38);
-  --border: rgba(245,240,232,.1);
-}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-
-body {
-  font-family: 'DM Sans', sans-serif;
-  background: var(--ink);
-  color: var(--fg);
-  overflow-x: hidden;
-  cursor: none;
-}
-
-/* ── CURSOR ── */
-.cursor {
-  position: fixed; top: 0; left: 0;
-  width: 10px; height: 10px;
-  background: var(--gold);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%,-50%);
-  transition: transform .08s ease, width .3s, height .3s, background .3s;
-  mix-blend-mode: exclusion;
-}
-.cursor-ring {
-  position: fixed; top: 0; left: 0;
-  width: 36px; height: 36px;
-  border: 1px solid rgba(200,169,110,.5);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  transform: translate(-50%,-50%);
-  transition: transform .18s ease, width .3s, height .3s;
-}
-body:has(a:hover) .cursor { width: 18px; height: 18px; }
-body:has(a:hover) .cursor-ring { width: 56px; height: 56px; border-color: var(--gold); }
-
-/* ── NOISE OVERLAY ── */
-body::after {
-  content: '';
-  position: fixed; inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-  opacity: .038;
-  pointer-events: none;
-  z-index: 9000;
-}
-
-/* ── NAV ── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 1.6rem 4rem;
-  mix-blend-mode: normal;
-}
-nav::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(to bottom, var(--ink), transparent);
-  pointer-events: none;
-}
-.nav-logo {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-size: 1.3rem;
-  color: var(--gold);
-  text-decoration: none;
-  letter-spacing: .04em;
-  position: relative; z-index: 1;
-}
-.nav-links {
-  display: flex; gap: 3rem; list-style: none;
-  position: relative; z-index: 1;
-}
-.nav-links a {
-  font-size: .65rem; font-weight: 400;
-  letter-spacing: .22em; text-transform: uppercase;
-  color: var(--muted); text-decoration: none;
-  transition: color .25s;
-  position: relative;
-}
-.nav-links a::after {
-  content: '';
-  position: absolute; bottom: -3px; left: 0;
-  width: 0; height: 1px;
-  background: var(--gold);
-  transition: width .3s;
-}
-.nav-links a:hover { color: var(--cream); }
-.nav-links a:hover::after { width: 100%; }
-
-/* ── HAMBURGER ── */
-.hamburger {
-  display: none;
-  flex-direction: column; gap: 5px;
-  background: none; border: none;
-  cursor: none; padding: 6px;
-  z-index: 300; position: relative;
-}
-.hamburger span {
-  display: block; width: 22px; height: 1px;
-  background: var(--cream);
-  transition: transform .3s, opacity .3s, width .3s;
-  transform-origin: center;
-}
-.hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
-.hamburger.open span:nth-child(2) { opacity: 0; width: 0; }
-.hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-
-/* ── HERO ── */
-.hero {
-  min-height: 100vh;
-  display: grid; place-items: center;
-  position: relative;
-  overflow: hidden;
-  padding: 10rem 4rem 6rem;
-}
-
-/* grid déco en background */
-.hero-grid {
-  position: absolute; inset: 0;
-  background-image:
-    linear-gradient(rgba(200,169,110,.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(200,169,110,.04) 1px, transparent 1px);
-  background-size: 80px 80px;
-  mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 100%);
-}
-
-/* cercle glow */
-.hero-glow {
-  position: absolute;
-  width: 700px; height: 700px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(200,169,110,.06) 0%, transparent 70%);
-  top: 50%; left: 50%;
-  transform: translate(-50%,-50%);
-  pointer-events: none;
-  animation: breathe 6s ease-in-out infinite;
-}
-@keyframes breathe {
-  0%,100% { transform: translate(-50%,-50%) scale(1); }
-  50% { transform: translate(-50%,-50%) scale(1.08); }
-}
-
-.hero-inner {
-  position: relative; z-index: 1;
-  max-width: 1000px; width: 100%;
-}
-
-.hero-tag {
-  display: inline-flex; align-items: center; gap: .8rem;
-  font-size: .6rem; font-weight: 400;
-  letter-spacing: .28em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 3rem;
-  opacity: 0; animation: slideIn .8s .2s ease forwards;
-}
-.hero-tag-line { width: 32px; height: 1px; background: var(--gold); }
-
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(4.5rem, 9vw, 9rem);
-  font-weight: 900;
-  line-height: .92;
-  letter-spacing: -.02em;
-  opacity: 0; animation: slideIn .9s .35s ease forwards;
-}
-.hero h1 .line1 { display: block; color: var(--cream); }
-.hero h1 .line2 {
-  display: block;
-  font-style: italic; font-weight: 400;
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--gold);
-  padding-left: 2rem;
-}
-.hero h1 .line3 { display: block; color: var(--cream); }
-
-.hero-sub-row {
-  display: flex; align-items: flex-end; justify-content: space-between;
-  margin-top: 4rem; gap: 3rem;
-  opacity: 0; animation: slideIn .8s .6s ease forwards;
-}
-.hero-desc {
-  font-size: .95rem; font-weight: 300;
-  line-height: 1.85; color: var(--muted);
-  max-width: 380px;
-}
-.hero-cta-group { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: flex-end; }
-
-.btn {
-  display: inline-block;
-  padding: 1rem 2.4rem;
-  font-family: 'DM Sans', sans-serif;
-  font-size: .62rem; font-weight: 500;
-  letter-spacing: .2em; text-transform: uppercase;
-  text-decoration: none;
-  cursor: none;
-  transition: all .3s;
-  border-radius: 2px;
-}
-.btn-gold {
-  background: var(--gold); color: var(--ink);
-  border: 1px solid var(--gold);
-}
-.btn-gold:hover { background: var(--gold-light); border-color: var(--gold-light); transform: translateY(-3px); }
-.btn-outline {
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--muted);
-}
-.btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-3px); }
-
-.hero-scroll {
-  position: absolute; bottom: 3rem; left: 50%;
-  transform: translateX(-50%);
-  display: flex; flex-direction: column; align-items: center; gap: .6rem;
-  font-size: .55rem; letter-spacing: .25em; text-transform: uppercase;
-  color: var(--muted);
-  animation: fadeUp .8s 1.2s ease both;
-}
-.hero-scroll-bar {
-  width: 1px; height: 50px;
-  background: linear-gradient(to bottom, var(--gold), transparent);
-  animation: scrollLine 2s ease-in-out infinite;
-}
-@keyframes scrollLine {
-  0% { transform: scaleY(0); transform-origin: top; }
-  50% { transform: scaleY(1); transform-origin: top; }
-  51% { transform-origin: bottom; }
-  100% { transform: scaleY(0); transform-origin: bottom; }
-}
-
-/* ── CHIFFRES ── */
-.metrics {
-  padding: 0 4rem;
-  position: relative;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-.metrics-inner {
-  display: grid; grid-template-columns: repeat(3,1fr);
-  max-width: 1100px; margin: 0 auto;
-}
-.metric {
-  padding: 4rem 3rem;
-  border-right: 1px solid var(--border);
-  opacity: 0; transform: translateY(20px);
-  transition: all .7s ease;
-}
-.metric:last-child { border-right: none; }
-.metric.visible { opacity: 1; transform: none; }
-.metric-num {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(3.5rem,5vw,5.5rem);
-  font-weight: 900;
-  font-style: italic;
-  color: var(--gold);
-  line-height: 1;
-  margin-bottom: .3rem;
-}
-.metric-label {
-  font-size: .6rem; font-weight: 400;
-  letter-spacing: .22em; text-transform: uppercase;
-  color: var(--muted);
-}
-
-/* ── ABOUT ── */
-.about {
-  padding: 12rem 4rem;
-  max-width: 1200px; margin: 0 auto;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 8rem;
-  align-items: center;
-}
-.about-label {
-  font-size: .6rem; font-weight: 400;
-  letter-spacing: .28em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 2rem;
-  display: flex; align-items: center; gap: .8rem;
-}
-.about-label::before {
-  content: ''; display: block;
-  width: 28px; height: 1px;
-  background: var(--gold);
-}
-.about h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2.6rem, 4vw, 4rem);
-  font-weight: 700; line-height: 1.12;
-  margin-bottom: 2.5rem;
-}
-.about h2 em { font-style: italic; color: var(--gold); }
-.about-text {
-  font-size: .95rem; font-weight: 300;
-  line-height: 2; color: var(--muted);
-  margin-bottom: 3rem;
-}
-.about-tags {
-  display: flex; flex-wrap: wrap; gap: .5rem;
-}
-.tag {
-  font-size: .58rem; font-weight: 400;
-  letter-spacing: .15em; text-transform: uppercase;
-  padding: .4rem 1rem;
-  border: 1px solid var(--border);
-  color: var(--muted);
-  border-radius: 1px;
-  transition: all .25s;
-}
-.tag:hover { border-color: var(--gold); color: var(--gold); }
-
-/* portrait côté droit */
-.about-visual {
-  position: relative;
-}
-.about-frame {
-  position: relative;
-  aspect-ratio: 3/4;
-  background: linear-gradient(135deg, #16120c 0%, #0e0b07 100%);
-  border: 1px solid var(--border);
-  overflow: hidden;
-}
-.about-frame::before {
-  content: '';
-  position: absolute; inset: 0;
-  background:
-    repeating-linear-gradient(-45deg,
-      transparent, transparent 20px,
-      rgba(200,169,110,.025) 20px,
-      rgba(200,169,110,.025) 21px);
-}
-.about-frame-letter {
-  position: absolute;
-  font-family: 'Playfair Display', serif;
-  font-size: 22rem; font-weight: 900; font-style: italic;
-  color: rgba(200,169,110,.06);
-  bottom: -4rem; right: -2rem;
-  line-height: 1; user-select: none;
-  pointer-events: none;
-}
-.about-frame-text {
-  position: absolute;
-  bottom: 2.5rem; left: 2.5rem; right: 2.5rem;
-}
-.about-frame-text-name {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.8rem; font-weight: 700; font-style: italic;
-  color: var(--cream); line-height: 1.2;
-}
-.about-frame-text-title {
-  font-size: .6rem; letter-spacing: .2em; text-transform: uppercase;
-  color: var(--gold); margin-top: .5rem;
-}
-.about-corner {
-  position: absolute;
-  width: 24px; height: 24px;
-  border-color: var(--gold);
-  border-style: solid;
-}
-.about-corner.tl { top: -8px; left: -8px; border-width: 1px 0 0 1px; }
-.about-corner.tr { top: -8px; right: -8px; border-width: 1px 1px 0 0; }
-.about-corner.bl { bottom: -8px; left: -8px; border-width: 0 0 1px 1px; }
-.about-corner.br { bottom: -8px; right: -8px; border-width: 0 1px 1px 0; }
-
-/* ── SERVICES ── */
-.services {
-  padding: 12rem 0;
-  border-top: 1px solid var(--border);
-}
-.services-head {
-  text-align: center; padding: 0 4rem 7rem;
-}
-.section-label {
-  font-size: .6rem; font-weight: 400;
-  letter-spacing: .28em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 1.5rem;
-  display: flex; align-items: center; justify-content: center; gap: .8rem;
-}
-.section-label::before, .section-label::after {
-  content: ''; display: block;
-  width: 28px; height: 1px;
-  background: var(--gold);
-}
-.services-head h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(3rem, 5vw, 5rem);
-  font-weight: 900; line-height: 1;
-  color: var(--cream);
-}
-.services-head h2 em { font-style: italic; color: var(--gold); }
-
-.services-list {
-  max-width: 1200px; margin: 0 auto; padding: 0 4rem;
-}
-.service-item {
-  display: grid; grid-template-columns: 80px 1fr auto;
-  align-items: center; gap: 3rem;
-  padding: 2.8rem 0;
-  border-bottom: 1px solid var(--border);
-  transition: all .3s;
-  cursor: none;
-}
-.service-item:first-child { border-top: 1px solid var(--border); }
-.service-item:hover { padding-left: 1.5rem; }
-.service-num {
-  font-family: 'DM Mono', monospace;
-  font-size: .65rem; font-weight: 300;
-  color: var(--muted); letter-spacing: .1em;
-}
-.service-body {}
-.service-name {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.4rem, 2.5vw, 2rem);
-  font-weight: 700; color: var(--cream);
-  margin-bottom: .4rem;
-  transition: color .25s;
-}
-.service-item:hover .service-name { color: var(--gold); }
-.service-desc {
-  font-size: .85rem; font-weight: 300;
-  color: var(--muted); line-height: 1.65;
-}
-.service-tag {
-  font-size: .58rem; font-weight: 400;
-  letter-spacing: .18em; text-transform: uppercase;
-  color: var(--gold);
-  border: 1px solid rgba(200,169,110,.2);
-  padding: .35rem .9rem;
-  white-space: nowrap;
-  transition: all .25s;
-}
-.service-item:hover .service-tag {
-  background: var(--gold-dim);
-  border-color: var(--gold);
-}
-
-/* ── APPROACH / PILLARS ── */
-.approach {
-  padding: 12rem 4rem;
-  position: relative; overflow: hidden;
-  border-top: 1px solid var(--border);
-}
-.approach-bg {
-  position: absolute; inset: 0;
-  background:
-    radial-gradient(ellipse 60% 80% at 0% 50%, rgba(200,169,110,.04) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 60% at 100% 50%, rgba(192,57,43,.04) 0%, transparent 60%);
-  pointer-events: none;
-}
-.approach-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
-.approach-header {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 6rem;
-  align-items: end; margin-bottom: 7rem;
-}
-.approach-header h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2.8rem, 4.5vw, 4.5rem);
-  font-weight: 900; line-height: 1.02; color: var(--cream);
-}
-.approach-header h2 em { font-style: italic; color: var(--gold); }
-.approach-intro {
-  font-size: .95rem; font-weight: 300;
-  line-height: 1.9; color: var(--muted);
-  padding-top: 1rem;
-}
-
-.pillars { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
-.pillar {
-  background: rgba(245,240,232,.02);
-  border: 1px solid var(--border);
-  padding: 3.5rem 3rem;
-  position: relative; overflow: hidden;
-  transition: all .35s;
-}
-.pillar:hover {
-  background: rgba(200,169,110,.04);
-  border-color: rgba(200,169,110,.25);
-  transform: translateY(-4px);
-}
-.pillar-num {
-  font-family: 'Playfair Display', serif;
-  font-size: 4rem; font-weight: 900; font-style: italic;
-  color: rgba(200,169,110,.1);
-  line-height: 1; margin-bottom: 2rem;
-  transition: color .3s;
-}
-.pillar:hover .pillar-num { color: rgba(200,169,110,.22); }
-.pillar-icon {
-  width: 40px; height: 40px;
-  border: 1px solid rgba(200,169,110,.3);
-  border-radius: 50%;
-  display: grid; place-items: center;
-  margin-bottom: 1.5rem;
-  color: var(--gold);
-}
-.pillar h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.5rem; font-weight: 700;
-  color: var(--cream); margin-bottom: 1rem;
-}
-.pillar p {
-  font-size: .85rem; font-weight: 300;
-  color: var(--muted); line-height: 1.8;
-}
-.pillar-arrow {
-  position: absolute; bottom: 2.5rem; right: 2.5rem;
-  font-size: 1rem; color: var(--gold);
-  opacity: 0; transform: translateX(-8px);
-  transition: all .3s;
-}
-.pillar:hover .pillar-arrow { opacity: 1; transform: none; }
-
-/* ── CTA MARQUEE ── */
-.marquee-section {
-  padding: 5rem 0;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  overflow: hidden;
-}
-.marquee {
-  display: flex; gap: 4rem;
-  animation: marquee 18s linear infinite;
-  white-space: nowrap;
-}
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-.marquee-item {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.8rem, 3vw, 2.5rem);
-  font-style: italic; font-weight: 400;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(200,169,110,.3);
-  flex-shrink: 0; white-space: nowrap;
-}
-.marquee-item.filled {
-  color: var(--gold);
-  -webkit-text-stroke: 0;
-}
-.marquee-dot {
-  flex-shrink: 0; align-self: center;
-  width: 6px; height: 6px; border-radius: 50%;
-  background: var(--gold); opacity: .4;
-}
-
-/* ── CONTACT / FOOTER ── */
-.footer {
-  padding: 10rem 4rem 4rem;
-  position: relative; overflow: hidden;
-  border-top: 1px solid var(--border);
-}
-.footer-bg {
-  position: absolute; inset: 0;
-  background:
-    radial-gradient(ellipse 70% 60% at 30% 0%, rgba(200,169,110,.05) 0%, transparent 55%);
-  pointer-events: none;
-}
-.footer-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
-.footer-top {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 8rem;
-  margin-bottom: 8rem;
-}
-.footer-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(3rem, 5.5vw, 5.5rem);
-  font-weight: 900; line-height: .96; color: var(--cream);
-}
-.footer-title em { font-style: italic; color: var(--gold); }
-.footer-right { display: flex; flex-direction: column; justify-content: flex-end; gap: 3rem; }
-.footer-desc {
-  font-size: .9rem; font-weight: 300;
-  line-height: 1.9; color: var(--muted);
-}
-.footer-mail-block {}
-.footer-mail-label {
-  font-size: .55rem; letter-spacing: .25em; text-transform: uppercase;
-  color: var(--muted); margin-bottom: .7rem;
-}
-.footer-mail-link {
-  font-family: 'Playfair Display', serif;
-  font-style: italic; font-size: 1.6rem;
-  color: var(--cream); text-decoration: none;
-  position: relative; display: inline-block;
-  transition: color .25s;
-}
-.footer-mail-link::after {
-  content: '';
-  position: absolute; bottom: -2px; left: 0;
-  width: 0; height: 1px;
-  background: var(--gold);
-  transition: width .4s cubic-bezier(.25,.46,.45,.94);
-}
-.footer-mail-link:hover { color: var(--gold); }
-.footer-mail-link:hover::after { width: 100%; }
-
-/* réseaux */
-.footer-socials { margin-bottom: 6rem; }
-.footer-socials-label {
-  font-size: .55rem; letter-spacing: .25em; text-transform: uppercase;
-  color: var(--muted); margin-bottom: 1.5rem;
-}
-.social-list { display: flex; gap: 1rem; flex-wrap: wrap; }
-.social-pill {
-  display: flex; align-items: center; gap: .8rem;
-  padding: .75rem 1.4rem;
-  border: 1px solid var(--border);
-  text-decoration: none; color: var(--muted);
-  font-size: .75rem; font-weight: 300;
-  transition: all .25s;
-  border-radius: 1px;
-}
-.social-pill:hover { border-color: var(--gold); color: var(--gold); }
-.social-icon {
-  width: 22px; height: 22px; border-radius: 4px;
-  display: grid; place-items: center; flex-shrink: 0;
-}
-.si-discord { background: #5865F2; }
-.si-tiktok { background: #111; border: 1px solid rgba(255,255,255,.1); }
-.si-insta { background: linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
-.si-snap { background: #FFFC00; }
-
-.footer-bottom {
-  display: flex; align-items: center; justify-content: space-between;
-  padding-top: 2.5rem; border-top: 1px solid var(--border);
-  gap: 2rem;
-}
-.footer-brand {
-  font-family: 'Playfair Display', serif;
-  font-style: italic; font-size: 1.1rem;
-  color: rgba(245,240,232,.25); text-decoration: none;
-}
-.footer-brand em { color: var(--gold); opacity: .5; }
-.footer-copy {
-  font-size: .6rem; letter-spacing: .12em;
-  color: rgba(245,240,232,.15);
-}
-.footer-back {
-  display: flex; align-items: center; gap: .6rem;
-  font-size: .6rem; letter-spacing: .18em; text-transform: uppercase;
-  color: var(--muted); text-decoration: none;
-  transition: color .25s;
-}
-.footer-back:hover { color: var(--gold); }
-
-/* ── REVEAL ── */
-.reveal {
-  opacity: 0; transform: translateY(28px);
-  transition: opacity .8s ease, transform .8s ease;
-}
-.reveal.visible { opacity: 1; transform: none; }
-
-/* ── ANIMATIONS ── */
-@keyframes slideIn {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: none; }
-}
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px) translateX(-50%); }
-  to { opacity: 1; transform: translateY(0) translateX(-50%); }
-}
-
-/* ── RESPONSIVE ── */
-@media (max-width: 1024px) {
-  .about { grid-template-columns: 1fr; gap: 4rem; }
-  .about-visual { display: none; }
-  .approach-header { grid-template-columns: 1fr; gap: 2rem; }
-  .footer-top { grid-template-columns: 1fr; gap: 4rem; }
-}
-
-@media (max-width: 768px) {
-  nav { padding: 1.2rem 1.5rem; }
-  .hamburger { display: flex; }
-  .nav-links {
-    display: none;
-    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(10,8,5,.97); backdrop-filter: blur(20px);
-    flex-direction: column; align-items: center; justify-content: center;
-    gap: 2.5rem; z-index: 250;
+  :root {
+    --gold: #8B6914;
+    --gold-light: #C4963A;
+    --gold-pale: #F5EDD8;
+    --gold-border: #C9A96E;
+    --brown-dark: #3D2B0F;
+    --brown-mid: #6B4C22;
+    --cream: #FAF6EE;
+    --cream-deep: #F0E8D5;
+    --text-dark: #2A1C08;
+    --text-mid: #5C4020;
+    --text-light: #8B6914;
   }
-  .hamburger { z-index: 300 !important; }
-  .nav-links.open { display: flex; }
-  .nav-links a { font-size: 1.2rem !important; letter-spacing: .1em; }
 
-  .hero { padding: 8rem 1.5rem 5rem; }
-  .hero-sub-row { flex-direction: column; align-items: flex-start; gap: 2rem; }
-  .hero-cta-group { justify-content: flex-start; }
-  .metrics { padding: 0 1.5rem; }
-  .metrics-inner { grid-template-columns: 1fr; }
-  .metric { border-right: none; border-bottom: 1px solid var(--border); padding: 2.5rem 1.5rem; }
-  .metric:last-child { border-bottom: none; }
-  .about { padding: 7rem 1.5rem; }
-  .services { padding: 7rem 0; }
-  .services-list { padding: 0 1.5rem; }
-  .service-item { grid-template-columns: 50px 1fr; gap: 1.5rem; }
-  .service-tag { display: none; }
-  .approach { padding: 7rem 1.5rem; }
-  .pillars { grid-template-columns: 1fr; }
-  .footer { padding: 7rem 1.5rem 3rem; }
-  .footer-title { font-size: 2.8rem; }
-}
+  html { scroll-behavior: smooth; }
 
-@media (max-width: 480px) {
-  .hero h1 { font-size: 3.5rem; }
-  .hero h1 .line2 { padding-left: 0; }
-  .btn { width: 100%; max-width: 280px; text-align: center; }
-  .services-head { padding: 0 1.5rem 4rem; }
-}
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(250,246,238,0.96);
+    border-bottom: 0.5px solid var(--gold-border);
+    backdrop-filter: blur(8px);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: var(--brown-dark);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--gold-light); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold-light); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 8rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-ornament {
+    width: 100%;
+    max-width: 600px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-border), transparent);
+    margin: 1.5rem auto;
+  }
+
+  .hero-tag {
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+  }
+
+  #hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--brown-dark);
+    letter-spacing: -0.01em;
+    margin-bottom: 0.3rem;
+  }
+
+  #hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+    color: var(--text-mid);
+    max-width: 520px;
+    margin: 1.5rem auto 2.5rem;
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 0.9rem 2.8rem;
+    border: 1px solid var(--gold-border);
+    color: var(--brown-dark);
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 400;
+    transition: all 0.3s;
+    background: transparent;
+    font-family: 'Jost', sans-serif;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    background: var(--brown-dark);
+    color: var(--cream);
+    border-color: var(--brown-dark);
+  }
+
+  /* Decorative corner lines behind hero text */
+  .hero-bg-deco {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .corner {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-color: var(--gold-border);
+    border-style: solid;
+    opacity: 0.4;
+  }
+
+  .corner-tl { top: 90px; left: 40px; border-width: 1px 0 0 1px; }
+  .corner-tr { top: 90px; right: 40px; border-width: 1px 1px 0 0; }
+  .corner-bl { bottom: 40px; left: 40px; border-width: 0 0 1px 1px; }
+  .corner-br { bottom: 40px; right: 40px; border-width: 0 1px 1px 0; }
+
+  /* ── SECTION BASE ── */
+  section { padding: 6rem 2rem; }
+
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    font-weight: 400;
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300;
+    color: var(--brown-dark);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .section-title em { font-style: italic; color: var(--gold); }
+
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: var(--gold-border);
+    margin: 1.5rem 0 2.5rem;
+  }
+
+  .divider.center { margin-left: auto; margin-right: auto; }
+
+  /* ── A PROPOS ── */
+  #apropos { background: var(--cream); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--text-mid);
+    margin-bottom: 1.2rem;
+    font-size: 0.97rem;
+  }
+
+  .about-mission {
+    background: var(--cream-deep);
+    border-left: 2px solid var(--gold-border);
+    padding: 2rem 2rem 2rem 2.5rem;
+  }
+
+  .about-mission h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--brown-dark);
+    margin-bottom: 1rem;
+  }
+
+  .about-mission p {
+    color: var(--text-mid);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+
+  .about-mission p:last-child { margin-bottom: 0; }
+
+  /* ── SERVICES ── */
+  #services { background: var(--cream-deep); }
+
+  .services-intro {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 4rem;
+  }
+
+  .services-intro p {
+    color: var(--text-mid);
+    font-size: 0.97rem;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    background: var(--gold-border);
+    border: 1px solid var(--gold-border);
+  }
+
+  .service-card {
+    background: var(--cream);
+    padding: 2.5rem;
+    transition: background 0.3s;
+    position: relative;
+  }
+
+  .service-card:hover { background: var(--gold-pale); }
+
+  .service-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--gold-border);
+    line-height: 1;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .service-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--brown-dark);
+    margin-bottom: 0.8rem;
+  }
+
+  .service-card p {
+    color: var(--text-mid);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .service-list {
+    list-style: none;
+    margin-top: 0.8rem;
+  }
+
+  .service-list li {
+    font-size: 0.85rem;
+    color: var(--text-mid);
+    padding: 0.3rem 0;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+
+  .service-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--gold-light);
+    font-size: 0.8rem;
+  }
+
+  /* ── VALEURS ── */
+  #valeurs { background: var(--brown-dark); }
+
+  #valeurs .section-label { color: var(--gold-light); }
+  #valeurs .section-title { color: var(--cream); }
+  #valeurs .section-title em { color: var(--gold-light); }
+  #valeurs .divider { background: var(--gold-border); }
+
+  .valeurs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    margin-top: 1rem;
+  }
+
+  .valeur-item { text-align: center; }
+
+  .valeur-icon {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--gold-light);
+    display: block;
+    margin-bottom: 1rem;
+    font-style: italic;
+  }
+
+  .valeur-item h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--cream);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  .valeur-item p {
+    font-size: 0.85rem;
+    color: rgba(250,246,238,0.6);
+    line-height: 1.7;
+  }
+
+  /* ── FONDATEUR ── */
+  #fondateur { background: var(--cream); }
+
+  .fondateur-wrap {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .fondateur-portrait {
+    aspect-ratio: 3/4;
+    background: var(--cream-deep);
+    border: 1px solid var(--gold-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .fondateur-portrait::before {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border: 0.5px solid var(--gold-border);
+    opacity: 0.5;
+  }
+
+  .portrait-initials {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    font-weight: 300;
+    color: var(--gold-border);
+    font-style: italic;
+  }
+
+  .fondateur-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--brown-dark);
+    margin-bottom: 0.3rem;
+  }
+
+  .fondateur-title {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 2rem;
+    display: block;
+  }
+
+  .fondateur-bio p {
+    color: var(--text-mid);
+    font-size: 0.97rem;
+    margin-bottom: 1rem;
+  }
+
+  /* ── CONTACT / RÉSEAUX ── */
+  #contact { background: var(--brown-dark); text-align: center; }
+  #contact .section-label { color: var(--gold-light); }
+  #contact .section-title { color: var(--cream); }
+  #contact .section-title em { color: var(--gold-light); }
+  #contact .divider { background: var(--gold-border); }
+
+  .social-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .social-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 2rem 2.5rem;
+    border: 1px solid rgba(201,169,110,0.35);
+    background: rgba(250,246,238,0.04);
+    text-decoration: none;
+    min-width: 160px;
+    transition: background 0.3s, border-color 0.3s, transform 0.2s;
+  }
+
+  .social-card:hover {
+    background: rgba(250,246,238,0.1);
+    border-color: var(--gold-border);
+    transform: translateY(-4px);
+  }
+
+  .social-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .social-icon svg {
+    width: 32px;
+    height: 32px;
+    fill: var(--gold-light);
+    transition: fill 0.2s;
+  }
+
+  .social-card:hover .social-icon svg { fill: var(--gold-border); }
+
+  .social-name {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(250,246,238,0.5);
+    font-weight: 400;
+  }
+
+  .social-handle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: var(--cream);
+    font-style: italic;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--brown-dark);
+    color: rgba(250,246,238,0.5);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    border-top: 1px solid var(--gold-border);
+  }
+
+  footer span { color: var(--gold-light); }
+
+  /* ── ANIMATIONS ── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .about-grid, .fondateur-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .valeurs-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .corner { display: none; }
+    .contact-box { padding: 2.5rem 1.5rem; }
+  }
 </style>
 </head>
 <body>
 
-<!-- Custom cursor -->
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursor-ring"></div>
-
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">Maholo · Piloxy</a>
-  <button class="hamburger" id="hamburger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-  <ul class="nav-links" id="nav-links">
-    <li><a href="#services" onclick="closeMenu()">Services</a></li>
-    <li><a href="#apropos" onclick="closeMenu()">À propos</a></li>
-    <li><a href="#approche" onclick="closeMenu()">Approche</a></li>
-    <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+  <a class="nav-logo" href="#hero">Pil<span>o</span>xy</a>
+  <ul class="nav-links">
+    <li><a href="#apropos">À propos</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#fondateur">Équipe</a></li>
+    <li><a href="#contact">Nous contacter</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-glow"></div>
-  <div class="hero-inner">
-    <div class="hero-tag">
-      <span class="hero-tag-line"></span>
-      Marketing Manager · 17 ans
-      <span class="hero-tag-line"></span>
-    </div>
-    <h1>
-      <span class="line1">Votre visibilité</span>
-      <span class="line2">digitale</span>
-      <span class="line3">à un autre niveau.</span>
-    </h1>
-    <div class="hero-sub-row">
-      <p class="hero-desc">J'aide les entreprises à attirer plus de clients grâce à des solutions modernes, efficaces et entièrement adaptées à votre image.</p>
-      <div class="hero-cta-group">
-        <a href="#contact" class="btn btn-gold">Démarrons →</a>
-        <a href="#services" class="btn btn-outline">Mes services</a>
-      </div>
-    </div>
+<section id="hero">
+  <div class="hero-bg-deco">
+    <div class="corner corner-tl"></div>
+    <div class="corner corner-tr"></div>
+    <div class="corner corner-bl"></div>
+    <div class="corner corner-br"></div>
   </div>
-  <div class="hero-scroll">
-    <span>Défiler</span>
-    <div class="hero-scroll-bar"></div>
-  </div>
+  <p class="hero-tag">Agence Marketing Digital &amp; Communication Visuelle</p>
+  <div class="hero-ornament"></div>
+  <h1>Donnez de la <em>voix</em><br>à votre entreprise</h1>
+  <div class="hero-ornament"></div>
+  <p class="hero-sub">Piloxy accompagne commerces, indépendants et projets locaux pour développer leur visibilité, soigner leur image et renforcer leur présence en ligne.</p>
+  <a href="#services" class="btn-primary">Découvrir nos services</a>
 </section>
 
-<!-- METRICS -->
-<div class="metrics">
-  <div class="metrics-inner">
-    <div class="metric reveal">
-      <div class="metric-num">17</div>
-      <div class="metric-label">ans d'énergie</div>
-    </div>
-    <div class="metric reveal">
-      <div class="metric-num">05</div>
-      <div class="metric-label">services proposés</div>
-    </div>
-    <div class="metric reveal">
-      <div class="metric-num">∞</div>
-      <div class="metric-label">dédication</div>
-    </div>
-  </div>
-</div>
-
-<!-- ABOUT -->
-<section class="about" id="apropos">
-  <div class="reveal">
-    <div class="about-label">À propos</div>
-    <h2>J'ai <em>17 ans</em> et je vous aide à passer au niveau <em>supérieur</em></h2>
-    <p class="about-text">Je m'appelle Maholo. Mon objectif est simple — vous accompagner dans votre croissance grâce à des solutions modernes, efficaces et adaptées à votre image. Que ce soit pour votre site, vos réseaux ou votre stratégie, je suis là pour vous faire briller.</p>
-    <div class="about-tags">
-      <span class="tag">Création web</span>
-      <span class="tag">Marketing digital</span>
-      <span class="tag">Réseaux sociaux</span>
-      <span class="tag">Stratégie</span>
-      <span class="tag">Publicité en ligne</span>
-    </div>
-  </div>
-  <div class="about-visual reveal">
-    <div class="about-frame">
-      <div class="about-frame-letter">M</div>
-      <div class="about-frame-text">
-        <div class="about-frame-text-name">Maholo<br>Piloxy</div>
-        <div class="about-frame-text-title">Marketing Manager</div>
+<!-- À PROPOS -->
+<section id="apropos">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text fade-in">
+        <span class="section-label">Qui sommes-nous</span>
+        <h2 class="section-title">Une agence à votre <em>service</em></h2>
+        <div class="divider"></div>
+        <p>L'agence Piloxy est spécialisée dans le marketing digital et la communication visuelle, fondée et dirigée par M. Dauber Maholo, auto-entrepreneur passionné par le numérique et l'accompagnement des entreprises.</p>
+        <p>Notre agence ne se limite pas uniquement à la publicité ou aux réseaux sociaux. Nous proposons un accompagnement complet afin d'aider les entreprises à construire une véritable identité digitale professionnelle.</p>
+        <p>Aujourd'hui, être présent en ligne est devenu indispensable pour attirer des clients, gagner en crédibilité et faire évoluer son activité.</p>
+      </div>
+      <div class="about-mission fade-in">
+        <h3>Notre mission</h3>
+        <p>La mission de Piloxy est simple : permettre aux entreprises de se développer grâce au digital.</p>
+        <p>Beaucoup d'entreprises possèdent un savoir-faire exceptionnel mais manquent de visibilité ou de stratégie de communication. Notre rôle est de mettre en avant leur activité à travers des contenus de qualité, une image professionnelle et des outils modernes.</p>
+        <p>Nous croyons qu'une entreprise doit pouvoir présenter ses services de manière claire, attractive et professionnelle afin de se démarquer de la concurrence. C'est pourquoi nous travaillons avec sérieux, créativité et innovation pour offrir des résultats concrets.</p>
+        <p>Notre objectif est également de créer une relation de confiance avec chaque client en proposant un accompagnement personnalisé et des solutions adaptées à chaque projet.</p>
       </div>
     </div>
-    <div class="about-corner tl"></div>
-    <div class="about-corner tr"></div>
-    <div class="about-corner bl"></div>
-    <div class="about-corner br"></div>
   </div>
 </section>
 
 <!-- SERVICES -->
-<section class="services" id="services">
-  <div class="services-head reveal">
-    <div class="section-label">Ce que je propose</div>
-    <h2>Mes <em>services</em></h2>
-  </div>
-  <div class="services-list">
-    <div class="service-item reveal">
-      <div class="service-num">01</div>
-      <div class="service-body">
-        <div class="service-name">Accompagnement d'entreprise</div>
-        <div class="service-desc">Mise en place de systèmes, conseils stratégiques et optimisation continue de votre activité.</div>
-      </div>
-      <span class="service-tag">Stratégie</span>
+<section id="services">
+  <div class="container">
+    <div class="services-intro fade-in">
+      <span class="section-label">Ce que nous faisons</span>
+      <h2 class="section-title">Nos <em>services</em></h2>
+      <div class="divider center"></div>
+      <p>Des solutions complètes pour construire et valoriser votre image digitale, pensées pour chaque profil d'entreprise.</p>
     </div>
-    <div class="service-item reveal">
-      <div class="service-num">02</div>
-      <div class="service-body">
-        <div class="service-name">Création de site web</div>
-        <div class="service-desc">Sites personnalisés selon vos goûts — modernes, rapides et pensés pour convertir.</div>
+    <div class="services-grid">
+
+      <div class="service-card fade-in">
+        <span class="service-num">01</span>
+        <h3>Création de contenu</h3>
+        <p>Les réseaux sociaux et internet occupent une place essentielle dans la communication des entreprises. Nous créons du contenu moderne et attractif pour capter l'attention et améliorer votre image de marque.</p>
+        <ul class="service-list">
+          <li>Publications pour les réseaux sociaux</li>
+          <li>Visuels professionnels</li>
+          <li>Vidéos promotionnelles</li>
+          <li>Contenus pour Instagram, TikTok, Facebook et autres plateformes</li>
+        </ul>
       </div>
-      <span class="service-tag">Web</span>
-    </div>
-    <div class="service-item reveal">
-      <div class="service-num">03</div>
-      <div class="service-body">
-        <div class="service-name">Création de contenu</div>
-        <div class="service-desc">Visuels, textes et formats adaptés à votre audience pour engager et convaincre.</div>
+
+      <div class="service-card fade-in">
+        <span class="service-num">02</span>
+        <h3>Création de sites web</h3>
+        <p>Un site internet est la vitrine digitale d'une entreprise. Piloxy conçoit des sites web modernes, professionnels et adaptés aux besoins de chaque client.</p>
+        <ul class="service-list">
+          <li>Présenter votre activité de manière claire</li>
+          <li>Améliorer la visibilité sur internet</li>
+          <li>Renforcer la crédibilité de votre entreprise</li>
+          <li>Faciliter la prise de contact avec les clients</li>
+        </ul>
       </div>
-      <span class="service-tag">Contenu</span>
-    </div>
-    <div class="service-item reveal">
-      <div class="service-num">04</div>
-      <div class="service-body">
-        <div class="service-name">Publicité en ligne</div>
-        <div class="service-desc">Campagnes ciblées pour booster votre visibilité et attirer de nouveaux clients rapidement.</div>
+
+      <div class="service-card fade-in">
+        <span class="service-num">03</span>
+        <h3>Photographie &amp; Vidéo</h3>
+        <p>Une bonne photo ou une vidéo de qualité peut avoir un impact considérable sur la perception d'une entreprise. Nous produisons des contenus visuels capables d'attirer l'attention et de valoriser votre image.</p>
+        <ul class="service-list">
+          <li>Photographie professionnelle</li>
+          <li>Tournage vidéo</li>
+          <li>Mise en avant de produits</li>
+          <li>Vidéos publicitaires et promotionnelles</li>
+          <li>Captation d'événements</li>
+        </ul>
       </div>
-      <span class="service-tag">Publicité</span>
-    </div>
-    <div class="service-item reveal">
-      <div class="service-num">05</div>
-      <div class="service-body">
-        <div class="service-name">Gestion des réseaux sociaux</div>
-        <div class="service-desc">Animation, stratégie éditoriale et croissance de votre communauté sur les réseaux.</div>
+
+      <div class="service-card fade-in">
+        <span class="service-num">04</span>
+        <h3>Montage vidéo &amp; Retouche</h3>
+        <p>Le montage est une étape importante pour obtenir un rendu professionnel et dynamique. Grâce à ces compétences, nous créons des contenus modernes, fluides et adaptés aux tendances actuelles.</p>
+        <ul class="service-list">
+          <li>Montage vidéo</li>
+          <li>Effets visuels</li>
+          <li>Correction des couleurs</li>
+          <li>Retouche photo</li>
+          <li>Optimisation pour les réseaux sociaux</li>
+        </ul>
       </div>
-      <span class="service-tag">Réseaux</span>
+
     </div>
   </div>
 </section>
 
-<!-- MARQUEE -->
-<div class="marquee-section">
-  <div class="marquee">
-    <span class="marquee-item">Visibilité</span>
-    <span class="marquee-dot"></span>
-    <span class="marquee-item filled">Marketing</span>
-    <span class="marquee-dot"></span>
-    <span class="marquee-item">Croissance</span>
-    <span class="marquee-dot"></span>
-    <span class="marquee-item filled">Création web</span>
-    <span class="marquee-dot"></span>
-    <span class="marquee-item">Stratégie</span>
-    <span class="marquee-dot"></span>
-    <span class="marquee-item filled">Contenu</span>
-    <span class="marquee-dot"></span>
-    <!-- duplicate for seamless loop -->
-    <span class="marquee-item">Visibilité</span>
-    <span class="marquee-dot"></span>
-    <span class="marquee-item filled">Marketing</span>
-    <span class="marquee-dot"></span>
-    <span class="marquee-item">Croissance</span>
-    <span class="marquee-dot"></span>
-    <span class="marquee-item filled">Création web</span>
-    <span class="marquee-dot"></span>
-    <span class="marquee-item">Stratégie</span>
-    <span class="marquee-dot"></span>
-    <span class="marquee-item filled">Contenu</span>
-    <span class="marquee-dot"></span>
-  </div>
-</div>
-
-<!-- APPROACH -->
-<section class="approach" id="approche">
-  <div class="approach-bg"></div>
-  <div class="approach-inner">
-    <div class="approach-header reveal">
-      <div>
-        <div class="section-label" style="justify-content:flex-start">Mon approche</div>
-        <h2>Trois piliers pour votre <em>réussite</em></h2>
-      </div>
-      <p class="approach-intro">Des fondations solides pour construire une présence digitale durable et faire passer votre entreprise au niveau supérieur.</p>
+<!-- VALEURS -->
+<section id="valeurs">
+  <div class="container">
+    <div style="text-align:center" class="fade-in">
+      <span class="section-label">Notre philosophie</span>
+      <h2 class="section-title">Ce en quoi nous <em>croyons</em></h2>
+      <div class="divider center"></div>
     </div>
-    <div class="pillars">
-      <div class="pillar reveal">
-        <div class="pillar-num">01</div>
-        <div class="pillar-icon">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/>
-            <circle cx="12" cy="12" r="3"/>
+    <div class="valeurs-grid">
+      <div class="valeur-item fade-in">
+        <span class="valeur-icon">I.</span>
+        <h4>Sérieux</h4>
+        <p>Chaque projet est traité avec rigueur et professionnalisme, du premier échange jusqu'à la livraison finale.</p>
+      </div>
+      <div class="valeur-item fade-in">
+        <span class="valeur-icon">II.</span>
+        <h4>Créativité</h4>
+        <p>Nous apportons un regard neuf et des idées originales pour que votre image se démarque réellement.</p>
+      </div>
+      <div class="valeur-item fade-in">
+        <span class="valeur-icon">III.</span>
+        <h4>Proximité</h4>
+        <p>Un accompagnement personnalisé et une relation de confiance durable avec chaque client.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FONDATEUR -->
+<section id="fondateur">
+  <div class="container">
+    <div class="fondateur-wrap">
+      <div class="fondateur-portrait fade-in">
+        <span class="portrait-initials">DM</span>
+      </div>
+      <div class="fade-in">
+        <span class="section-label">L'équipe</span>
+        <p class="fondateur-name">Dauber Maholo</p>
+        <span class="fondateur-title">Fondateur &amp; Dirigeant · Auto-entrepreneur</span>
+        <div class="divider"></div>
+        <div class="fondateur-bio">
+          <p>Passionné par le numérique et l'accompagnement des entreprises, Dauber Maholo a fondé Piloxy avec une conviction forte : chaque entreprise, quelle que soit sa taille, mérite une présence digitale à la hauteur de son savoir-faire.</p>
+          <p>Son expertise couvre le marketing digital, la communication visuelle, la création de contenu et le développement web. Il intervient directement sur chaque projet, garantissant un suivi personnalisé et un résultat aligné avec les objectifs de chaque client.</p>
+          <p>Avec Piloxy, vous avez un interlocuteur unique, disponible, et pleinement investi dans la réussite de votre activité.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT / RÉSEAUX -->
+<section id="contact">
+  <div class="container">
+    <div style="text-align:center" class="fade-in">
+      <span class="section-label">Nous contacter</span>
+      <h2 class="section-title">Retrouvez-nous sur nos <em>réseaux</em></h2>
+      <div class="divider center"></div>
+    </div>
+    <div class="social-grid fade-in">
+
+      <!-- Instagram -->
+      <a class="social-card" href="https://www.instagram.com/D-Maholo" target="_blank" rel="noopener">
+        <div class="social-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
           </svg>
         </div>
-        <h3>Visibilité</h3>
-        <p>Je mets en place des solutions pour que votre entreprise se fasse remarquer et attire de nouveaux clients rapidement.</p>
-        <span class="pillar-arrow">→</span>
-      </div>
-      <div class="pillar reveal">
-        <div class="pillar-num">02</div>
-        <div class="pillar-icon">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+        <span class="social-name">Instagram</span>
+        <span class="social-handle">@D-Maholo</span>
+      </a>
+
+      <!-- TikTok -->
+      <a class="social-card" href="https://www.tiktok.com/@_0_woody_0_" target="_blank" rel="noopener">
+        <div class="social-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/>
           </svg>
         </div>
-        <h3>Marketing</h3>
-        <p>Je crée du contenu et des campagnes adaptées à votre activité pour développer votre audience et booster votre image.</p>
-        <span class="pillar-arrow">→</span>
-      </div>
-      <div class="pillar reveal">
-        <div class="pillar-num">03</div>
-        <div class="pillar-icon">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <polyline points="16 18 22 12 16 6"/>
-            <polyline points="8 6 2 12 8 18"/>
+        <span class="social-name">TikTok</span>
+        <span class="social-handle">@_0_woody_0_</span>
+      </a>
+
+      <!-- Snapchat -->
+      <a class="social-card" href="https://www.snapchat.com/add/kini-dauber" target="_blank" rel="noopener">
+        <div class="social-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.206.793c.99 0 4.347.276 5.93 3.821.529 1.193.403 3.219.317 4.baron-.customer 0-.client 0 0 0l-.004.045c-.016.176-.032.352.05.523.237.497 1.12.843 1.473.96.238.077.48.116.486.321.004.143-.109.287-.3.349-.176.057-.371.078-.566.079-.21.001-.41.006-.595.063-.344.107-.408.372-.272.558.004.006.011.016.016.023.197.265.424.568.424.858 0 .29-.149.484-.354.612-.257.162-.579.246-.897.322-.419.098-.815.19-1.043.416-.261.26-.326.606-.392.957-.052.279-.106.566-.27.787-.176.237-.455.34-.752.34-.158 0-.32-.027-.474-.079-.298-.101-.557-.291-.816-.481-.361-.262-.722-.523-1.15-.523-.427 0-.789.261-1.15.523-.259.19-.518.38-.816.481-.154.052-.316.079-.474.079-.297 0-.576-.103-.752-.34-.164-.221-.218-.508-.27-.787-.066-.351-.131-.697-.392-.957-.228-.226-.624-.318-1.043-.416-.318-.076-.64-.16-.897-.322-.205-.128-.354-.322-.354-.612 0-.29.227-.593.424-.858.005-.007.012-.017.016-.023.136-.186.072-.451-.272-.558-.185-.057-.385-.062-.595-.063-.195-.001-.39-.022-.566-.079-.191-.062-.304-.206-.3-.349.006-.205.248-.244.486-.321.353-.117 1.236-.463 1.473-.96.082-.171.066-.347.05-.523l-.004-.045c-.086-1.033-.212-3.057.317-4.25C7.853 1.069 11.215.793 12.206.793z"/>
           </svg>
         </div>
-        <h3>Développement</h3>
-        <p>Je réalise des sites web sur mesure, modernes et performants pour mettre en valeur votre entreprise.</p>
-        <span class="pillar-arrow">→</span>
-      </div>
+        <span class="social-name">Snapchat</span>
+        <span class="social-handle">kini-dauber</span>
+      </a>
+
+      <!-- Mail -->
+      <a class="social-card" href="mailto:maholo.contact@gmail.com">
+        <div class="social-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+          </svg>
+        </div>
+        <span class="social-name">E-mail</span>
+        <span class="social-handle">maholo.contact@gmail.com</span>
+      </a>
+
     </div>
   </div>
 </section>
 
-<!-- FOOTER / CONTACT -->
-<footer class="footer" id="contact">
-  <div class="footer-bg"></div>
-  <div class="footer-inner">
-    <div class="footer-top reveal">
-      <div>
-        <div class="section-label" style="justify-content:flex-start">Me contacter</div>
-        <h2 class="footer-title">Parlons de<br>votre <em>projet.</em></h2>
-      </div>
-      <div class="footer-right">
-        <p class="footer-desc">Vous avez un projet en tête ? Je suis disponible pour en discuter et vous accompagner vers vos objectifs. N'hésitez pas à me contacter.</p>
-        <div class="footer-mail-block">
-          <div class="footer-mail-label">Adresse e-mail</div>
-          <a href="mailto:maholo.contact@gmail.com" class="footer-mail-link">maholo.contact@gmail.com</a>
-        </div>
-        <a href="mailto:maholo.contact@gmail.com" class="btn btn-gold" style="align-self:flex-start">Envoyer un message →</a>
-      </div>
-    </div>
-
-    <div class="footer-socials reveal">
-      <div class="footer-socials-label">Mes réseaux</div>
-      <div class="social-list">
-        <a href="#" class="social-pill">
-          <span class="social-icon si-discord">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="#fff"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
-          </span>
-          woody_2009
-        </a>
-        <a href="#" class="social-pill">
-          <span class="social-icon si-tiktok">
-            <svg width="12" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg>
-          </span>
-          _0_woody_0_
-        </a>
-        <a href="#" class="social-pill">
-          <span class="social-icon si-insta">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="#fff"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
-          </span>
-          D-maholo
-        </a>
-        <a href="#" class="social-pill">
-          <span class="social-icon si-snap">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="#000"><path d="M12.065.001C9.33 0 5.94 1.656 4.898 5.196c-.33 1.12-.26 2.278-.26 3.455-.391.192-.784.29-1.211.29-.54 0-1.006-.218-1.237-.218-.408 0-.68.283-.68.624 0 .45.396.72.778.854.094.032.203.063.32.097.599.174 1.505.437 1.96 1.304.032.06.063.124.09.19.018.042.026.085.026.123 0 .126-.076.243-.215.33-1.195.73-2.022 1.76-2.022 2.845 0 .183.044.358.12.519.33.702 1.313 1.132 2.636 1.295.128.017.253.03.377.04.078.01.16.024.246.043.295.07.534.29.596.588.073.35.358.572.717.572.145 0 .288-.034.44-.073.343-.088.812-.21 1.45-.21.564 0 1.017.1 1.413.19l.067.015c.41.1.803.195 1.248.195.455 0 .856-.1 1.278-.202.386-.089.834-.187 1.382-.187.638 0 1.107.122 1.45.21.151.039.294.073.44.073.358 0 .643-.222.716-.572.063-.298.302-.518.597-.588.086-.019.168-.033.246-.043.124-.01.25-.023.377-.04 1.323-.163 2.306-.593 2.636-1.295.076-.16.12-.336.12-.519 0-1.085-.827-2.114-2.022-2.845-.139-.087-.215-.204-.215-.33 0-.038.008-.081.026-.123.027-.066.058-.13.09-.19.455-.867 1.361-1.13 1.96-1.304.117-.034.226-.065.32-.097.382-.134.778-.404.778-.854 0-.341-.272-.624-.68-.624-.231 0-.697.218-1.237.218-.427 0-.82-.098-1.211-.29 0-1.177.07-2.334-.26-3.455C18.06 1.656 14.8.001 12.065.001z"/></svg>
-          </span>
-          kini-dauber
-        </a>
-      </div>
-    </div>
-
-    <div class="footer-bottom reveal">
-      <a href="#" class="footer-brand"><em>Maholo</em> · Piloxy</a>
-      <span class="footer-copy">© 2026 — Tous droits réservés</span>
-      <a href="#" class="footer-back">↑ Retour en haut</a>
-    </div>
-  </div>
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <span>Piloxy</span> · Agence Marketing Digital &amp; Communication Visuelle · Fondée par Dauber Maholo</p>
 </footer>
 
 <script>
-// ── Cursor ──
-const cursor = document.getElementById('cursor');
-const cursorRing = document.getElementById('cursor-ring');
-let mx = 0, my = 0, rx = 0, ry = 0;
-document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-(function animCursor() {
-  rx += (mx - rx) * .18;
-  ry += (my - ry) * .18;
-  if (cursor) { cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; }
-  if (cursorRing) { cursorRing.style.left = rx + 'px'; cursorRing.style.top = ry + 'px'; }
-  requestAnimationFrame(animCursor);
-})();
-
-// ── Hamburger ──
-var btn = document.getElementById('hamburger');
-var menu = document.getElementById('nav-links');
-if (btn && menu) {
-  btn.addEventListener('click', function(e) {
-    e.stopPropagation();
-    btn.classList.toggle('open');
-    menu.classList.toggle('open');
-  });
-}
-function closeMenu() {
-  if (btn) btn.classList.remove('open');
-  if (menu) menu.classList.remove('open');
-}
-
-// ── Scroll reveal ──
-var reveals = document.querySelectorAll('.reveal');
-if ('IntersectionObserver' in window) {
-  var obs = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e, i) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
       if (e.isIntersecting) {
-        setTimeout(function() { e.target.classList.add('visible'); }, i * 80);
-        obs.unobserve(e.target);
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
       }
     });
-  }, { threshold: 0.08 });
-  reveals.forEach(function(el) { obs.observe(el); });
-} else {
-  reveals.forEach(function(el) { el.classList.add('visible'); });
-}
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
